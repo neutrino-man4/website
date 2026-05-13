@@ -1,0 +1,9 @@
+# Block sensitive files
+<FilesMatch "\.(env|git|gitignore|log|htpasswd|claude)$">
+  Require all denied
+</FilesMatch>
+
+# Allow PHP files
+<FilesMatch "\.php$">
+  Require all granted
+</FilesMatch>
