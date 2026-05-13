@@ -1,0 +1,301 @@
+/* ============================================================
+   research.css — Research page styles
+   ============================================================ */
+
+/* ─── Page shell ─────────────────────────────────────────── */
+.research-page {
+  margin-top: var(--nav-h);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 8vw, 8rem);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── Page header ────────────────────────────────────────── */
+.research-header {
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+}
+
+.research-header__heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+
+.research-header__intro {
+  font-size: 0.97rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-muted);
+  max-width: 580px;
+}
+
+/* ─── Topics container ───────────────────────────────────── */
+.topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Single topic ───────────────────────────────────────── */
+.topic {
+  display: grid;
+  grid-template-columns: 3fr 2fr;   /* text gets 60%, carousel 40% */
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+/* Alternate layout — carousel on left, text on right */
+.topic--reverse {
+  direction: rtl;
+}
+.topic--reverse > * {
+  direction: ltr;
+}
+
+/* ─── Text side ──────────────────────────────────────────── */
+.topic__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.topic__index {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--cream-dark);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  /* Subtle outline effect */
+  -webkit-text-stroke: 1px rgba(122, 158, 126, 0.35);
+  user-select: none;
+}
+
+.topic__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-top: -0.5rem;
+}
+
+.topic__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.topic__body {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-muted);
+}
+
+.topic__body em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* Tags */
+.topic__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(77, 122, 82, 0.08);
+  border: 1px solid rgba(77, 122, 82, 0.22);
+  padding: 0.28rem 0.7rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ─── Carousel ───────────────────────────────────────────── */
+.topic__carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: relative;
+  align-items: center;   /* centre the square within the column */
+}
+
+/* Fixed square — width driven by the 2fr column, aspect-ratio locks height */
+.carousel__track {
+  position: relative;
+  width: 90%;            /* slightly smaller than the column itself */
+  aspect-ratio: 1 / 1;  /* always a square regardless of image ratio */
+  background: var(--cream-dark);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* Each slide */
+.carousel__slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.carousel__slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+/* Placeholder shown when no images are found */
+.carousel__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--ink-faint);
+}
+
+.carousel__placeholder svg {
+  opacity: 0.3;
+}
+
+.carousel__placeholder p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+/* Controls row */
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.carousel__prev,
+.carousel__next {
+  background: none;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-muted);
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+  flex-shrink: 0;
+}
+
+.carousel__prev:hover,
+.carousel__next:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(77, 122, 82, 0.06);
+}
+
+/* Dots */
+.carousel__dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.carousel__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  opacity: 0.3;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
+}
+
+.carousel__dot.active {
+  opacity: 1;
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+/* ─── Section divider ────────────────────────────────────── */
+.topic__divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(122, 158, 126, 0.3), transparent);
+  margin: 0;
+}
+
+/* ─── Scroll reveal (shared with about.css pattern) ─────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .topic,
+  .topic--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 2rem;
+  }
+
+  .topic--reverse .topic__text     { order: 1; }
+  .topic--reverse .topic__carousel { order: 2; }
+
+  .carousel__track {
+    width: 75%;          /* square stays square, just narrower on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .research-page {
+    padding: 2rem 1.2rem;
+  }
+
+  .topic__index {
+    font-size: 1.0rem;
+
+  }
+
+  .carousel__track {
+    width: 92%;
+  }
+}
