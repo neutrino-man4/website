@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Aritra Bal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Tiro+Devanagari+Hindi:ital@0;1&family=Yatra+One&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="icons/etp_logo_color_de.png">
+</head>
+<body>
+
+  <!-- ───────────────────── NAVBAR ───────────────────── -->
+  <header class="navbar">
+    <div class="navbar__brand">
+      <span class="navbar__name" data-i18n="navbar.name">Dr. Aritra Bal, PhD</span>
+      <span class="navbar__title" data-i18n="navbar.title">Particle Physicist &amp; ML Researcher</span>
+    </div>
+    <nav class="navbar__links">
+      <a href="index.html"        class="nav-link active"  data-i18n="nav.home">Home</a>
+      <a href="about.html"        class="nav-link"          data-i18n="nav.about">About Me</a>
+      <a href="research.html"     class="nav-link"          data-i18n="nav.research">Research</a>
+      <a href="publications.html" class="nav-link"          data-i18n="nav.publications">Publications</a>
+    </nav>
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">
+      <img src="icons/uk.svg" id="langFlag" class="lang-flag" alt="" />
+      <span id="langCode" class="lang-code">EN</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html"        class="nav-link active"  data-i18n="nav.home">Home</a>
+    <a href="about.html"        class="nav-link"          data-i18n="nav.about">About Me</a>
+    <a href="research.html"     class="nav-link"          data-i18n="nav.research">Research</a>
+    <a href="publications.html" class="nav-link"          data-i18n="nav.publications">Publications</a>
+  </div>
+
+  <!-- ───────────────────── HERO ───────────────────── -->
+  <main class="hero">
+
+    <!-- Decorative background curves -->
+    <svg class="hero__deco" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M-60 380 Q200 200 520 340 T900 260" stroke="#c8d5c0" stroke-width="1.2" fill="none" opacity="0.55"/>
+      <path d="M-80 460 Q260 300 600 410 T960 310" stroke="#b8c9af" stroke-width="0.8" fill="none" opacity="0.35"/>
+      <circle cx="820" cy="80"  r="180" fill="#e8ede4" opacity="0.35"/>
+      <circle cx="760" cy="120" r="90"  fill="#d4dece" opacity="0.25"/>
+    </svg>
+
+    <!-- Text column -->
+    <div class="hero__text">
+      <div class="hero__greeting" aria-label="Greetings">
+        <span class="greeting-word active" lang="hi">नमस्ते,</span>
+        <span class="greeting-word" lang="bn">নমস্কার,</span>
+        <span class="greeting-word" lang="en">Hello,</span>
+        <span class="greeting-word" lang="de">Servus,</span>
+      </div>
+      <h1 class="hero__heading" data-i18n-html="hero.heading">
+        I am&nbsp;Aritra,<br/>
+        a physicist at the<br/>
+        <em>Karlsruhe Institute<br/>of Technology.</em>
+      </h1>
+      <p class="hero__sub" data-i18n="hero.sub">
+        I work at the intersection of fundamental physics and AI, developing novel methods in the search for new physics at high energy colliders, using machine learning and quantum computing.
+      </p>
+      <a href="research.html" class="btn-primary">
+        <span data-i18n="hero.btn">Find Out More</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Portrait column -->
+    <div class="hero__portrait-wrap">
+      <div class="hero__portrait-bg">
+        <img
+          src="images/portrait.jpeg"
+          alt="Portrait of Dr. Aritra Bal"
+          class="hero__portrait"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="footer__links">
+
+      <a href="https://github.com/neutrino-man4" target="_blank" rel="noopener" class="footer__icon-link" aria-label="GitHub">
+        <img src="icons/github.svg" alt="" class="footer__icon" />
+        <span>GitHub</span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="https://scholar.google.com/citations?user=IcomXjAAAAAJ&hl=en" target="_blank" rel="noopener" class="footer__icon-link" aria-label="Google Scholar">
+        <img src="icons/scholar.svg" alt="" class="footer__icon" />
+        <span>Google Scholar</span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="mailto:aritra.bal@dont-spam-kit.edu" class="footer__icon-link" aria-label="Email">
+        <img src="icons/mail.svg" alt="" class="footer__icon" />
+        <span><span class="__cf_email__" data-cfemail="6504170c1117044b070409250e0c114b000110">E-Mail</span></span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="https://inspirehep.net/authors/1809400" target="_blank" rel="noopener" class="footer__icon-link" aria-label="INSPIRE-HEP">
+        <img src="icons/inspirehep.png" alt="" class="footer__icon footer__inspire-icon" />
+        <span>INSPIRE-HEP</span>
+      </a>
+
+    </div>
+    <div class="footer__right">
+      <p class="footer__plots-hint">Click <a href="https://etpwww.etp.kit.edu/~abal/plots/" target="_blank" rel="noopener" class="footer__plots-link">here</a> for plots</p>
+      <p class="footer__copy" data-i18n="footer.copy">&copy; 2026 Aritra Bal &nbsp;&middot;&nbsp; Karlsruhe Institute of Technology</p>
+    </div>
+  </footer>
+
+  <script src="lang.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
