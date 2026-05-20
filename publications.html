@@ -46,13 +46,24 @@
 
     <!-- Page header -->
     <section class="pub-header">
-      <p class="section-label" data-i18n="section.publications">Publications</p>
+      <p class="section-label" data-i18n="section.works">Works</p>
       <p class="pub-header__intro" data-i18n="pub.intro">
-        A complete list of my published and submitted works in High Energy Physics and Machine Learning.
+        A list of my publications (both published and in peer-review) along with a list of my talks at major international conferences.
       </p>
     </section>
 
-    <!-- ───────────────────── PUBLICATION LIST ───────────────────── -->
+    <!-- ───────────────────── TAB BAR ───────────────────── -->
+    <div class="pub-tabs" role="tablist">
+      <button class="pub-tab active" id="tab-btn-publications" role="tab"
+              aria-selected="true" aria-controls="panel-publications"
+              data-i18n="pub.tab.publications">Publications</button>
+      <button class="pub-tab" id="tab-btn-talks" role="tab"
+              aria-selected="false" aria-controls="panel-talks"
+              data-i18n="pub.tab.talks">Talks</button>
+    </div>
+
+    <!-- ───────────────────── PUBLICATIONS PANEL ───────────────────── -->
+    <div id="panel-publications" class="pub-panel" role="tabpanel">
     <ul class="pub-list">
       <!-- ── 1. Triality ── -->
       <li class="pub-card reveal">
@@ -80,10 +91,38 @@
           </div>
         </div>
       </li>
+            <!-- ── 5. CMS Note ── -->
+      <li class="pub-card reveal">
+        <div class="pub-card__left">
+          <span class="pub-card__num">02</span>
+          <span class="pub-card__year">2026</span>
+        </div>
+        <div class="pub-card__body">
+          <div class="pub-card__status-row">
+            <span class="pub-status pub-status--prep" data-i18n="p5.status">In preparation for publication</span>
+          </div>
+          <h2 class="pub-card__title">Machine learning techniques for model-independent searches in dijet final states</h2>
+          <p class="pub-card__authors">CMS Collaboration</p>
+          <div class="pub-card__abstract-wrap">
+            <p class="pub-card__abstract" data-i18n="p5.abstract">We present the performance of machine learning-based anomaly detection techniques for extracting potential new physics phenomena in a model-agnostic way with the CMS experiment at the LHC. We introduce five distinct outlier detection or density estimation techniques — CWoLa, Tag N'Train, CATHODE, QUAK, and QR-VAE — tailored for the identification of anomalous jets originating from the decay of unknown heavy particles. We demonstrate the utility of these approaches in enhancing the sensitivity to a wide variety of potential signals and assess their comparative performance in simulation.</p>
+            <button class="pub-abstract-toggle" aria-expanded="false">
+              <span data-i18n="pub.abstract.show">Show abstract</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+          <div class="pub-card__links">
+            <a href="https://cds.cern.ch/record/2881089" target="_blank" rel="noopener" class="pub-link pub-link--cds">CDS</a>
+            <a href="https://arxiv.org/abs/2512.20395" target="_blank" rel="noopener" class="pub-link pub-link--arxiv">arXiv</a>
+            <a href="papers/MLG_23_002.pdf" target="_blank" rel="noopener" class="pub-link pub-link--pdf">PDF</a>
+            <button class="pub-link pub-link--bibtex" data-bibtex="5">BibTeX</button>
+          </div>
+        </div>
+      </li>
+
       <!-- ── 1. QINNs ── -->
       <li class="pub-card reveal">
         <div class="pub-card__left">
-          <span class="pub-card__num">01</span>
+          <span class="pub-card__num">03</span>
           <span class="pub-card__year">2025</span>
         </div>
         <div class="pub-card__body">
@@ -102,6 +141,7 @@
           <div class="pub-card__links">
             <a href="https://arxiv.org/abs/2510.17984" target="_blank" rel="noopener" class="pub-link pub-link--arxiv">arXiv</a>
             <a href="papers/QINN.pdf" target="_blank" rel="noopener" class="pub-link pub-link--pdf">PDF</a>
+            <a href="https://github.com/neutrino-man4/qGNN/" target="_blank" rel="noopener" class="pub-link pub-link--github"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;display:block" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/></svg><span>GitHub</span></a>
             <button class="pub-link pub-link--bibtex" data-bibtex="1">BibTeX</button>
           </div>
         </div>
@@ -110,7 +150,7 @@
       <!-- ── 2. 1P1Q ── -->
       <li class="pub-card reveal">
         <div class="pub-card__left">
-          <span class="pub-card__num">02</span>
+          <span class="pub-card__num">04</span>
           <span class="pub-card__year">2025</span>
         </div>
         <div class="pub-card__body">
@@ -138,7 +178,7 @@
       <!-- ── 3. CMS Dijet ── -->
       <li class="pub-card reveal">
         <div class="pub-card__left">
-          <span class="pub-card__num">03</span>
+          <span class="pub-card__num">05</span>
           <span class="pub-card__year">2025</span>
         </div>
         <div class="pub-card__body">
@@ -168,7 +208,7 @@
       <!-- ── 4. DistillNet ── -->
       <li class="pub-card reveal">
         <div class="pub-card__left">
-          <span class="pub-card__num">04</span>
+          <span class="pub-card__num">06</span>
           <span class="pub-card__year">2024</span>
         </div>
         <div class="pub-card__body">
@@ -194,35 +234,83 @@
         </div>
       </li>
 
-      <!-- ── 5. CMS Note ── -->
-      <li class="pub-card reveal">
-        <div class="pub-card__left">
-          <span class="pub-card__num">05</span>
-          <span class="pub-card__year">2023</span>
-        </div>
-        <div class="pub-card__body">
-          <div class="pub-card__status-row">
-            <span class="pub-status pub-status--prep" data-i18n="p5.status">In preparation for publication</span>
-          </div>
-          <h2 class="pub-card__title">Machine learning techniques for model-independent searches in dijet final states</h2>
-          <p class="pub-card__authors">CMS Collaboration</p>
-          <div class="pub-card__abstract-wrap">
-            <p class="pub-card__abstract" data-i18n="p5.abstract">We present the performance of machine learning-based anomaly detection techniques for extracting potential new physics phenomena in a model-agnostic way with the CMS experiment at the LHC. We introduce five distinct outlier detection or density estimation techniques — CWoLa, Tag N'Train, CATHODE, QUAK, and QR-VAE — tailored for the identification of anomalous jets originating from the decay of unknown heavy particles. We demonstrate the utility of these approaches in enhancing the sensitivity to a wide variety of potential signals and assess their comparative performance in simulation.</p>
-            <button class="pub-abstract-toggle" aria-expanded="false">
-              <span data-i18n="pub.abstract.show">Show abstract</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-          </div>
-          <div class="pub-card__links">
-            <a href="https://cds.cern.ch/record/2881089" target="_blank" rel="noopener" class="pub-link pub-link--cds">CDS</a>
-            <a href="https://arxiv.org/abs/2512.20395" target="_blank" rel="noopener" class="pub-link pub-link--arxiv">arXiv</a>
-            <a href="papers/MLG_23_002.pdf" target="_blank" rel="noopener" class="pub-link pub-link--pdf">PDF</a>
-            <button class="pub-link pub-link--bibtex" data-bibtex="5">BibTeX</button>
-          </div>
-        </div>
-      </li>
 
     </ul>
+    </div><!-- /panel-publications -->
+
+    <!-- ───────────────────── TALKS PANEL ───────────────────── -->
+    <div id="panel-talks" class="pub-panel" role="tabpanel" hidden>
+      <ul class="pub-list">
+
+        <!-- ── T1. Anomaly Detection — LHCP 2026 ── -->
+        <li class="pub-card reveal">
+          <div class="pub-card__left">
+            <span class="pub-card__num">01</span>
+            <span class="pub-card__year">2026</span>
+          </div>
+          <div class="pub-card__body">
+            <h2 class="pub-card__title">Anomaly Detection for New Physics</h2>
+            <p class="talk-card__meta" data-i18n="t1.meta">LHCP 2026, Paris, France</p>
+            <p class="talk-card__date" data-i18n="t1.date">19 May 2026</p>
+            <div class="pub-card__links">
+              <a href="https://indico.cern.ch/event/1537360/contributions/7018627/" target="_blank" rel="noopener" class="pub-link pub-link--indico">Indico</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- ── T2. 1P1Q — ML4Jets 2025 ── -->
+        <li class="pub-card reveal">
+          <div class="pub-card__left">
+            <span class="pub-card__num">02</span>
+            <span class="pub-card__year">2025</span>
+          </div>
+          <div class="pub-card__body">
+            <h2 class="pub-card__title">1 Particle &#8211; 1 Qubit: Particle Physics Data Encoding for Quantum Machine Learning</h2>
+            <p class="talk-card__meta" data-i18n="t2.meta">ML4Jets 2025, Caltech, Pasadena, USA</p>
+            <p class="talk-card__date" data-i18n="t2.date">22 August 2025</p>
+            <div class="pub-card__links">
+              <a href="https://indico.cern.ch/event/1526677/contributions/6530881/" target="_blank" rel="noopener" class="pub-link pub-link--indico">Indico</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- ── T3. 1P1Q — EPS-HEP 2025 ── -->
+        <li class="pub-card reveal">
+          <div class="pub-card__left">
+            <span class="pub-card__num">03</span>
+            <span class="pub-card__year">2025</span>
+          </div>
+          <div class="pub-card__body">
+            <h2 class="pub-card__title">1 Particle &#8211; 1 Qubit: Particle Physics Data Encoding for Quantum Machine Learning</h2>
+            <p class="talk-card__meta" data-i18n="t3.meta">EPS-HEP 2025, Marseille, France</p>
+            <p class="talk-card__date" data-i18n="t3.date">9 July 2025</p>
+            <div class="pub-card__links">
+              <a href="https://indico.in2p3.fr/event/33627/contributions/155068/" target="_blank" rel="noopener" class="pub-link pub-link--indico">Indico</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- ── T4. CMS Dijet — ML4Jets 2024 ── -->
+        <li class="pub-card reveal">
+          <div class="pub-card__left">
+            <span class="pub-card__num">04</span>
+            <span class="pub-card__year">2024</span>
+          </div>
+          <div class="pub-card__body">
+            <h2 class="pub-card__title">Model-agnostic search for dijet resonances with anomalous jet substructure in proton&#8211;proton collisions at &radic;<span style="text-decoration:overline">s</span>&thinsp;=&thinsp;13&thinsp;TeV with the CMS detector</h2>
+            <p class="talk-card__meta" data-i18n="t4.meta">ML4Jets 2024, Paris, France</p>
+            <p class="talk-card__date" data-i18n="t4.date">7 November 2024</p>
+            <div class="pub-card__links">
+              <a href="https://indico.cern.ch/event/1386125/contributions/6181748/" target="_blank" rel="noopener" class="pub-link pub-link--indico">Indico</a>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+      <p class="talks-footnote" data-i18n="talks.footnote">And several talks at the annual DPG Spring Meetings, FSP CMS Annual Meetings and CMS Town Halls.</p>
+    </div><!-- /panel-talks -->
+
   </main>
 
   <!-- ───────────────────── BIBTEX MODAL ───────────────────── -->
