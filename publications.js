@@ -39,6 +39,31 @@
 
   };
 
+  /* ── Tab switching ──────────────────────────────────────── */
+  var tabBtns  = document.querySelectorAll('.pub-tab');
+  var tabPanels = document.querySelectorAll('.pub-panel');
+
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('aria-controls');
+      tabBtns.forEach(function (b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(function (p) { p.hidden = true; });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = document.getElementById(targetId);
+      if (panel) {
+        panel.hidden = false;
+        /* Trigger reveal animation for newly visible cards */
+        panel.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
+          revealObs.observe(el);
+        });
+      }
+    });
+  });
+
   /* ── Scroll reveal ───────────────────────────────────────── */
   var revealObs = new IntersectionObserver(
     function (entries) {
