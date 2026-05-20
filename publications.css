@@ -10,11 +10,12 @@
   max-width: 980px;
   margin-left: auto;
   margin-right: auto;
+  flex: 1; /* keeps footer pinned to bottom regardless of content length */
 }
 
 /* ─── Page header ────────────────────────────────────────── */
 .pub-header {
-  margin-bottom: clamp(3rem, 7vw, 5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   animation: fadeUp 0.7s ease both;
 }
 
@@ -33,6 +34,66 @@
   line-height: 1.8;
   color: var(--ink-muted);
   max-width: 540px;
+}
+
+/* ─── Tab bar ────────────────────────────────────────────── */
+.pub-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--cream-dark);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.pub-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+  padding: 0.55rem 1.1rem 0.65rem;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.pub-tab:hover { color: var(--ink-muted); }
+
+.pub-tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Tab panels ─────────────────────────────────────────── */
+.pub-panel[hidden] { display: none; }
+
+/* ─── Talk card: conference + location line ──────────────── */
+.talk-card__meta {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* ─── Talk card: date line ───────────────────────────────── */
+.talk-card__date {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+}
+
+/* ─── Talks footnote ─────────────────────────────────────── */
+.talks-footnote {
+  font-size: 0.84rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--cream-dark);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  margin-top: 0.5rem;
 }
 
 /* ─── Publication list ───────────────────────────────────── */
@@ -308,6 +369,18 @@
   border-color: var(--ink);
 }
 
+/* Indico */
+.pub-link--indico {
+  background: rgba(0, 114, 184, 0.08);
+  color: #005f9e;
+  border-color: rgba(0, 114, 184, 0.24);
+}
+.pub-link--indico:hover {
+  background: #005f9e;
+  color: var(--white);
+  border-color: #005f9e;
+}
+
 /* BibTeX */
 .pub-link--bibtex {
   background: none;
@@ -318,6 +391,18 @@
   background: var(--ink);
   color: var(--white);
   border-color: var(--ink);
+}
+
+/* GitHub */
+.pub-link--github {
+  background: rgba(80, 93, 112, 0.09);
+  color: #3d4a58;
+  border-color: rgba(80, 93, 112, 0.30);
+}
+.pub-link--github:hover {
+  background: #3d444d;
+  color: var(--white);
+  border-color: #3d444d;
 }
 
 /* ─── Scroll reveal (shared pattern) ────────────────────── */
