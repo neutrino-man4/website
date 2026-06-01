@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="One Particle – One Qubit: Particle Physics Data Encoding for Quantum Machine Learning">
+  <meta name="description" content="1P1Q assigns each particle to a single qubit, enabling lossless, direct encoding of collider events on quantum circuits. Demonstrated via a QAE for anomaly detection and a VQC for top-quark jet classification, with validation on real CMS experimental data.">
+  <meta name="keywords" content="quantum machine learning, quantum autoencoder, variational quantum circuit, jet tagging, LHC, CMS, 1P1Q encoding, Bloch sphere, anomaly detection, top quark, JetClass, particle physics">
+  <meta name="author" content="Aritra Bal, Markus Klute, Benedikt Maier, Melik Oughton, Eric Pezone, Michael Spannowsky">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aritra Bal et al.">
+  <meta property="og:title" content="1P1Q">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://etpwww.etp.kit.edu/~abal/projects/1P1Q/">
+  <meta property="og:image" content="https://etpwww.etp.kit.edu/~abal/projects/1P1Q/static/1P1Q/1p1q_logo.png">
+  <meta property="og:image:alt" content="1P1Q">
+  <meta property="article:published_time" content="2025-10-09T00:00:00.000Z">
+  <meta property="article:author" content="Aritra Bal">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="quantum machine learning">
+  <meta property="article:tag" content="particle physics">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1P1Q">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://etpwww.etp.kit.edu/~abal/projects/1P1Q/static/1P1Q/1p1q_logo.png">
+  <meta name="twitter:image:alt" content="1P1Q">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="One particle - one qubit: Particle physics data encoding for quantum machine learning">
+  <meta name="citation_author" content="Bal, Aritra">
+  <meta name="citation_author" content="Klute, Markus">
+  <meta name="citation_author" content="Maier, Benedikt">
+  <meta name="citation_author" content="Oughton, Melik">
+  <meta name="citation_author" content="Pezone, Eric">
+  <meta name="citation_author" content="Spannowsky, Michael">
+  <meta name="citation_journal_title" content="Physical Review D">
+  <meta name="citation_volume" content="112">
+  <meta name="citation_firstpage" content="076004">
+  <meta name="citation_publication_date" content="2025">
+  <meta name="citation_doi" content="10.1103/l8y2-87vq">
+  <meta name="citation_arxiv_id" content="2502.17301">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>1P1Q</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="static/1P1Q/1p1q_logo.png">
+  <link rel="apple-touch-icon" href="static/1P1Q/1p1q_logo.png">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- MathJax for equation rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'none'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "One particle - one qubit: Particle physics data encoding for quantum machine learning",
+    "description": "1P1Q is a lossless quantum encoding scheme where each jet constituent is assigned to a single qubit via spherical Bloch sphere coordinates. A QAE achieves anomaly detection superior to a classical counterpart with 80x fewer parameters; a VQC approaches state-of-the-art jet tagging performance.",
+    "author": [
+      {"@type": "Person", "name": "Aritra Bal",
+       "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}},
+      {"@type": "Person", "name": "Markus Klute",
+       "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}},
+      {"@type": "Person", "name": "Benedikt Maier",
+       "affiliation": {"@type": "Organization", "name": "Imperial College London"}},
+      {"@type": "Person", "name": "Melik Oughton",
+       "affiliation": {"@type": "Organization", "name": "Imperial College London"}},
+      {"@type": "Person", "name": "Eric Pezone",
+       "affiliation": {"@type": "Organization", "name": "Imperial College London"}},
+      {"@type": "Person", "name": "Michael Spannowsky",
+       "affiliation": {"@type": "Organization", "name": "Durham University"}}
+    ],
+    "datePublished": "2025-10-09",
+    "publisher": {"@type": "Organization", "name": "American Physical Society"},
+    "isPartOf": {"@type": "Periodical", "name": "Physical Review D", "volumeNumber": "112"},
+    "pageStart": "076004",
+    "identifier": [
+      {"@type": "PropertyValue", "propertyID": "doi", "value": "10.1103/l8y2-87vq"},
+      {"@type": "PropertyValue", "propertyID": "arXiv", "value": "2502.17301"}
+    ],
+    "keywords": ["quantum machine learning", "variational quantum circuit", "quantum autoencoder", "jet physics", "LHC", "Bloch sphere", "anomaly detection"],
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <style>
+    .affiliation-block {
+      font-size: 0.85em;
+      color: #555;
+      margin-top: 0.6rem;
+      line-height: 1.8;
+    }
+    .affiliation-block sup {
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .publication-logo {
+      width: 280px;
+      height: auto;
+      margin: 0 auto 1.2rem;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+    }
+    @media screen and (max-width: 768px) {
+      .publication-logo {
+        width: 140px;
+        margin-bottom: 1rem;
+      }
+    }
+    .results-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .results-table td, .results-table th {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .results-table td:first-child, .results-table th:first-child {
+      text-align: left;
+    }
+    .figure-caption {
+      font-size: 0.85em;
+      color: #666;
+      text-align: center;
+      margin-top: 0.6rem;
+      line-height: 1.5;
+    }
+    .math-section .content p {
+      margin-bottom: 0.8rem;
+    }
+    .eq-block {
+      margin: 1.2rem 0;
+    }
+    .section-subtitle {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #363636;
+    }
+    .correspondence {
+      font-size: 0.82em;
+      color: #777;
+      margin-top: 0.5rem;
+    }
+    .onepq-label {
+      font-variant: small-caps;
+      letter-spacing: 0.02em;
+    }
+    .highlight-row td {
+      background-color: #eef4ff !important;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <a href="https://etpwww.etp.kit.edu/~abal/projects/quiver" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Quiver: QUantum-Informed Views for Enhanced Representations in Large Machine Learning Models</h5>
+            <p>Augmenting large classical models with a quantum Fisher information view derived from variational quantum circuits.</p>
+            <span class="work-venue">ICML 2026 AI4Physics Workshop</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+  <!-- ===== HERO / TITLE ===== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <img
+              src="static/1P1Q/1p1q_logo.png"
+              alt="1P1Q logo"
+              class="publication-logo"
+            >
+
+            <h1 class="title is-1 publication-title">
+              One Particle &ndash; One Qubit:
+              Particle Physics Data Encoding for Quantum Machine Learning
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.etp.kit.edu/~abal/" target="_blank">Aritra Bal</a><sup>1</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="https://www.etp.kit.edu/~klute/" target="_blank">Markus Klute</a><sup>1</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Benedikt Maier</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Melik Oughton</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Eric Pezone</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="https://www.ippp.dur.ac.uk/profile/spannowsky" target="_blank">Michael Spannowsky</a><sup>3</sup>
+              </span>
+            </div>
+
+            <div class="affiliation-block">
+              <sup>1</sup>Institute of Experimental Particle Physics (ETP), Karlsruhe Institute of Technology, Karlsruhe, DE &nbsp;&nbsp;
+              <sup>2</sup>Imperial-X and Department of Physics, Imperial College of Science, Technology and Medicine, London, UK<br>
+              <sup>3</sup>Institute for Particle Physics Phenomenology (IPPP), Durham University, Durham, UK
+            </div>
+
+            <p class="correspondence">
+              <em>Physical Review D <strong>112</strong>, 076004 (2025) &nbsp;&middot;&nbsp;
+              Correspondence: <a href="mailto:aritra.bal@kit.edu">aritra.bal@kit.edu</a></em>
+            </p>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+
+                <span class="link-block">
+                  <a href="https://journals.aps.org/prd/abstract/10.1103/l8y2-87vq" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2502.17301" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ABSTRACT ===== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce <strong>1P1Q</strong> (1&nbsp;Particle &ndash; 1&nbsp;Qubit), a novel quantum data
+              encoding scheme for high-energy physics (HEP), where each reconstructed particle
+              is assigned to an individual qubit. This allows collision events to be represented
+              directly on quantum circuits without prior classical compression, preserving
+              the full kinematic information of each jet constituent as a quantum state.
+            </p>
+            <p>
+              We demonstrate the effectiveness of 1P1Q through two quantum machine learning
+              (QML) applications: a <strong>Quantum Autoencoder (QAE)</strong> for
+              unsupervised anomaly detection, and a <strong>Variational Quantum Circuit (VQC)</strong>
+              for supervised classification of top-quark jets. The QAE successfully distinguishes
+              signal jets from background QCD jets, outperforming a classical autoencoder
+              despite using only \(31\) trainable parameters versus \({\sim}2500\). The VQC
+              achieves an AUC of \(0.885\) versus \(0.898\) for the state-of-the-art
+              Particle Transformer, with just \(32\) parameters against over two million, and
+              surpasses it in background rejection at signal efficiencies above \(80\%\).
+              Furthermore, for the first time, we validate a QML model trained on real
+              experimental data from the CMS detector, establishing the robustness of
+              1P1Q in practical HEP applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== METHOD / MATH ===== -->
+  <section class="section math-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">The 1P1Q Encoding</h2>
+
+      <div class="content has-text-justified">
+
+        <p>
+          In collider measurements, each reconstructed particle is fully characterised by
+          three kinematic quantities: the transverse momentum \(p_\text{T} = \sqrt{p_x^2 + p_y^2}\),
+          the pseudorapidity \(\eta = -\ln\tan(\nu/2)\), and the azimuthal angle \(\phi\).
+          The 1P1Q scheme maps these three variables directly onto a single qubit by identifying
+          them with spherical coordinates on the Bloch sphere, establishing a lossless,
+          geometry-preserving bridge between particle kinematics and quantum state space.
+        </p>
+
+        <h3 class="title is-4">Bloch Sphere Mapping</h3>
+        <p>
+          The pseudorapidity and azimuthal angle of particle \(k\), modulated by its
+          relative transverse momentum and a trainable sigmoid scale factor \(f\),
+          define the polar and azimuthal rotation angles:
+        </p>
+        <div class="eq-block">
+          \[
+            f \cdot \frac{p_\text{T}}{p_{\text{T},\text{jet}}} \cdot (\eta - \eta_\text{jet})
+            \;\longrightarrow\; \theta, \tag{1}
+          \]
+        </div>
+        <div class="eq-block">
+          \[
+            f \cdot \frac{p_\text{T}}{p_{\text{T},\text{jet}}} \cdot (\phi - \phi_\text{jet})
+            \;\longrightarrow\; \varphi. \tag{2}
+          \]
+        </div>
+        <p>
+          The quantum state of the qubit encoding particle \(k\) is then:
+        </p>
+        <div class="eq-block">
+          \[
+            (p_\text{T},\,\eta,\,\phi) \;\longrightarrow\; |\psi\rangle
+            = R_X(\varphi)\,R_Y(\theta)\,|0\rangle
+            = \alpha(\theta,\varphi)\,|0\rangle + \beta(\theta,\varphi)\,|1\rangle. \tag{3}
+          \]
+        </div>
+        <p>
+          The scale factor \(f\) is a trainable sigmoid function of a single learnable
+          weight \(w\):
+        </p>
+        <div class="eq-block">
+          \[
+            f \;=\; 1 + \frac{2\pi}{1 + e^{-w}}, \tag{4}
+          \]
+        </div>
+        <p>
+          which constrains \(f \in [1,\, 2\pi+1]\) and ensures the encoded states spread
+          across the Bloch sphere rather than clustering near the north pole. The coordinates
+          \(\eta\) and \(\phi\) are taken relative to the jet axis, making the encoding
+          independent of the overall energy scale of the collision event.
+          Figure 1 illustrates the effect of this scaling for the ten hardest particles
+          in a top-quark jet and a QCD light-quark jet.
+        </p>
+
+      </div>
+
+      <!-- Bloch sphere figure -->
+      <div class="columns is-centered" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
+        <div class="column is-four-fifths">
+          <img
+            src="static/1P1Q/3d_spheres.png"
+            alt="Bloch sphere visualisation of 1P1Q encoding for a top-quark jet and a QCD jet"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            <strong>Figure 1:</strong> Bloch sphere representation of the 1P1Q encoding applied to the ten
+            hardest particles of a top-quark jet (\(t \to b q\bar{q}'\), red) and a QCD light-flavor jet
+            (blue) at comparable jet \(p_\text{T} \approx 714\,\text{GeV}\).
+            Left: before applying the trainable scale factor (\(f = 1\));
+            right: after training, where \(w\) converges to \(f = 7.268\),
+            spreading the encoded states across the full sphere and improving discriminative power.
+          </p>
+        </div>
+      </div>
+
+      <div class="content has-text-justified" style="margin-top: 1.5rem;">
+
+        <h3 class="title is-4">Quantum Autoencoder (QAE) for Anomaly Detection</h3>
+        <p>
+          The QAE compresses the \(N\)-qubit encoded state into a smaller latent representation
+          by replacing \(N_\text{trash}\) qubits with \(N_\text{ref} = N_\text{trash}\)
+          reference qubits initialised to \(|0\rangle\), creating an information bottleneck.
+          The unitary transformation applied to the full register is:
+        </p>
+        <div class="eq-block">
+          \[
+            U(\boldsymbol{\Theta}) =
+            \left(\bigotimes_{i=1}^{N} R_X(\phi_i)\,R_Y(\theta_i)\,R_Z(\omega_i)\right)
+            \otimes
+            \left(\bigotimes_{1 \le i < j \le N} C_{ij}\right), \tag{5}
+          \]
+        </div>
+        <p>
+          where the \(C_{ij}\) are CNOT gates acting on all distinct qubit pairs, introducing
+          non-linear inter-particle correlations. The QAE requires only \(3N + 1\) trainable
+          parameters for an \(N\)-particle jet. It is trained to maximise the fidelity between
+          the trash and reference subspaces on background QCD events:
+        </p>
+        <div class="eq-block">
+          \[
+            \mathcal{F} = \sum_{i=1}^{N_\text{ref}} \langle T_i | R_i \rangle, \quad
+            T_i \in \mathcal{H}_T,\; R_i \in \mathcal{H}_\text{ref}. \tag{6}
+          \]
+        </div>
+        <p>
+          Signal jets (anomalies) yield systematically lower fidelity, providing a threshold-free
+          anomaly score without requiring signal labels during training.
+        </p>
+
+        <h3 class="title is-4" style="margin-top: 1.8rem;">Variational Quantum Circuit (VQC) for Classification</h3>
+        <p>
+          For supervised classification, a VQC uses the same 1P1Q encoding followed by
+          nearest-neighbor CNOT entanglement and three trainable rotations per qubit:
+        </p>
+        <div class="eq-block">
+          \[
+            U(\boldsymbol{\Theta}) =
+            \left(\bigotimes_{i=1}^{N} R_X(\phi_i)\,R_Y(\theta_i)\,R_Z(\omega_i)\right)
+            \otimes
+            \left(\bigotimes_{i=1}^{N} C_{i,\,(i+1)\,\mathrm{mod}\,N}\right). \tag{7}
+          \]
+        </div>
+        <p>
+          The classifier output is the expectation value of \(Z\) on the first qubit plus
+          a trainable bias:
+        </p>
+        <div class="eq-block">
+          \[
+            f(x) = \langle q(x)|\,Z\,|q(x)\rangle + b. \tag{8}
+          \]
+        </div>
+        <p>
+          The VQC requires only \(3N + 2\) trainable parameters (the extra term being the
+          bias \(b\)), and is optimised with the mean-squared error loss against the binary
+          jet-class label. Despite its extreme parameter economy, it achieves classification
+          performance competitive with billion-parameter-era state-of-the-art classical models.
+        </p>
+
+      </div>
+
+      <!-- Circuit figures -->
+      <div class="columns is-centered" style="margin-top: 1.5rem;">
+        <div class="column is-half">
+          <img
+            src="static/1P1Q/qae_circuit-1.png"
+            alt="QAE circuit diagram for anomaly detection"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            <strong>Figure 2a:</strong> Quantum Autoencoder (QAE) circuit for anomaly detection,
+            shown for a 4-particle input. Encoding layers (\(R_Y\), \(R_X\)) are followed by
+            all-to-all CNOT entanglement, trainable rotations (Rot), and a SWAP test
+            with an ancillary qubit to measure fidelity against the \(|0\rangle\) reference.
+          </p>
+        </div>
+        <div class="column is-half">
+          <img
+            src="static/1P1Q/vqc_circuit-1.png"
+            alt="VQC circuit diagram for supervised jet classification"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            <strong>Figure 2b:</strong> Variational Quantum Circuit (VQC) for supervised
+            classification, shown for an 8-particle input. Nearest-neighbor CNOT
+            entanglement replaces all-to-all coupling, and the final measurement
+            is a Pauli \(Z\) expectation on qubit 0.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== RESULTS ===== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Results</h2>
+
+      <!-- QAE Anomaly Detection -->
+      <h3 class="title is-4">Anomaly Detection with the QAE</h3>
+      <p class="has-text-justified" style="margin-bottom: 1rem;">
+        The QAE is trained on background QCD jets from the JetClass dataset and on real
+        CMS JetHT data recorded in 2016 (&gt;99% QCD jets). Figure 3 shows the quantum
+        fidelity \(\langle T|R\rangle\) distributions for the CMS-trained model:
+        signal jets (top-quark decays) produce systematically lower fidelity than background,
+        confirming that the 1P1Q-encoded QAE extracts physically meaningful substructure
+        information even from raw experimental data, without access to high-level features. <span style="color: #cc0000;">To the best of our knowledge, this is the first demonstration of a QML model trained on real collider data, validating the practical applicability of 1P1Q in experimental HEP contexts.</span>
+      </p>
+
+      <!-- Fidelity distribution figure -->
+      <div class="columns is-centered" style="margin-bottom: 1.5rem;">
+        <div class="column is-three-quarters">
+          <img
+            src="static/1P1Q/fidelity_AOJ_QCD_TTBar-1.png"
+            alt="Quantum fidelity distributions for QAE trained on CMS JetHT data"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            <strong>Figure 3:</strong> Quantum fidelity \(\langle T|R\rangle\) distributions for
+            a 10-qubit QAE with a 2-qubit latent space, trained on real CMS JetHT 2016 data
+            (blue shaded). Orange: simulated QCD jets (JetClass); green: top-quark signal
+            \(t \to b q\bar{q}'\). Signal jets accumulate at lower fidelity values,
+            providing a clean anomaly score without signal supervision.
+          </p>
+        </div>
+      </div>
+
+      <p class="has-text-justified" style="margin-bottom: 1rem;">
+        Table 1 quantifies the AUC performance of the 1P1Q QAE against a
+        classical autoencoder (CAE) on the same 10-particle input. The CAE is
+        substantially larger: its encoder has an input vector of size \(30\),
+        followed by dense layers of sizes \(20\text{-}16\text{-}12\) and a latent
+        space of dimension \(6\), giving \({\sim}2500\) trainable parameters.
+        The QAE requires only \(31\) parameters yet outperforms the CAE across
+        all three signal types.
+      </p>
+
+      <!-- AUC Table I -->
+      <div class="table-container" style="margin-bottom: 2rem; overflow-x: auto;">
+        <table class="table is-bordered is-striped is-hoverable results-table" style="max-width:600px; margin: 0 auto;">
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>\(W \to q\bar{q}'\)</th>
+              <th>\(H \to b\bar{b}\)</th>
+              <th>\(t \to bq\bar{q}'\)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>QAE (1P1Q)</strong></td>
+              <td><strong>0.715</strong></td>
+              <td><strong>0.774</strong></td>
+              <td><strong>0.872</strong></td>
+            </tr>
+            <tr>
+              <td>CAE (classical)</td>
+              <td>0.671</td>
+              <td>0.739</td>
+              <td>0.858</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="max-width:600px; margin: 0.5rem auto 0;">
+          <strong>Table 1:</strong> AUC scores for the 1P1Q QAE vs. classical autoencoder (CAE),
+          trained on a 10-particle input space. QAE rows shaded. The QAE uses \(31\) parameters;
+          the CAE uses \({\sim}2500\).
+        </p>
+      </div>
+
+      <!-- VQC vs ParT -->
+      <h3 class="title is-4" style="margin-top: 1.5rem;">Supervised Classification: VQC vs. Particle Transformer</h3>
+      <p class="has-text-justified" style="margin-bottom: 1rem;">
+        For top-quark jet tagging (\(t \to bq\bar{q}'\) vs. QCD), both the VQC and the
+        Particle Transformer (ParT) are trained on \(1000\) jets using the ten hardest
+        jet constituents. The VQC achieves an AUC of \(0.885\) with only \(32\) trainable
+        parameters. ParT achieves AUC \(= 0.898\) with over 2 million parameters.
+        We observe that the VQC yields superior background rejection at signal efficiencies
+        above \(80\%\), suggesting that the quantum geometry of the 1P1Q state
+        representation captures complementary information to the classical attention mechanism.
+      </p>
+
+      <!-- ROC figure -->
+      <div class="columns is-centered" style="margin-bottom: 2rem;">
+        <div class="column is-three-quarters">
+          <img
+            src="static/1P1Q/VQC_vs_ParT-1.png"
+            alt="ROC curve comparison of VQC (1P1Q) and Particle Transformer"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            <strong>Figure 4:</strong> Receiver Operating Characteristic (ROC) curves for the
+            VQC trained with 1P1Q encoding (AUC \(= 0.885\), \(\text{REJ}_{90\%} = 4.49\))
+            and the Particle Transformer (AUC \(= 0.898\), \(\text{REJ}_{90\%} = 3.89\)),
+            both trained on the same 1000-jet sample with 10 particles per jet.
+            Background rejection \(1/\epsilon_B\) is shown on a logarithmic scale.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature ablation table -->
+      <h3 class="title is-4" style="margin-top: 1rem;">Feature Ablation of the 1P1Q Encoding</h3>
+      <p class="has-text-justified" style="margin-bottom: 1rem;">
+        To assess which kinematic variables drive performance, features encoded per qubit
+        are removed one at a time. Table 2 shows AUC scores for the benchmark signal
+        \(t \to bq\bar{q}'\). All three variables are necessary; removing \(p_\text{T}\)
+        causes the largest drop, emphasising the importance of momentum-weighted angular
+        correlations in jet substructure analysis.
+      </p>
+
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="table is-bordered is-striped is-hoverable results-table" style="max-width:640px; margin: 0 auto;">
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>\((p_\text{T},\,\eta,\,\phi)\)</th>
+              <th>\((p_\text{T},\,\eta)\)</th>
+              <th>\((\eta,\,\phi)\)</th>
+              <th>\((p_\text{T},\,\phi)\)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>VQC</strong></td>
+              <td><strong>0.886</strong></td>
+              <td>0.856</td>
+              <td>0.808</td>
+              <td>0.857</td>
+            </tr>
+            <tr>
+              <td>QAE</td>
+              <td><strong>0.872</strong></td>
+              <td>0.825</td>
+              <td>0.823</td>
+              <td>0.827</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="max-width:640px; margin: 0.5rem auto 0;">
+          <strong>Table 2:</strong> AUC scores vs. input feature combinations for
+          signal \(t \to bq\bar{q}'\). Including all three kinematic variables
+          consistently gives the best performance. Removing \(p_\text{T}\) causes
+          the largest degradation for both models.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== BIBTEX ===== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{Bal:2025jyw,
+  author        = {Bal, Aritra and Klute, Markus and Maier, Benedikt and
+                   Oughton, Melik and Pezone, Eric and Spannowsky, Michael},
+  title         = {{One particle -- one qubit: Particle physics data encoding
+                   for quantum machine learning}},
+  journal       = {Phys. Rev. D},
+  volume        = {112},
+  pages         = {076004},
+  year          = {2025},
+  doi           = {10.1103/l8y2-87vq},
+  eprint        = {2502.17301},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-ph},
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>
+              which was adopted from the
+              <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you
+              link back to this page in the footer.<br>
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+                Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </main>
+</body>
+</html>
