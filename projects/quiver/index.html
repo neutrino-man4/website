@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="QUIVER: QUantum-Informed Views for Enhanced Representations in Large Machine Learning Models">
+  <meta name="description" content="QUIVER enriches classical ML models with a quantum Fisher view derived from variational quantum circuits, improving jet tagging at the LHC and molecular property prediction on QM9.">
+  <meta name="keywords" content="quantum machine learning, quantum Fisher information, variational quantum circuits, jet physics, JETCLASS, QM9, molecular property prediction, Particle Transformer, DimeNet, HOMO-LUMO gap">
+  <meta name="author" content="Aritra Bal, Michael Binder, Markus Klute, Benedikt Maier, Michael Spannowsky">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aritra Bal et al.">
+  <meta property="og:title" content="QUIVER">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://etpwww.etp.kit.edu/~abal/projects/quiver/">
+  <meta property="og:image" content="https://etpwww.etp.kit.edu/~abal/projects/quiver/static/quiver/quiver_logo.png">
+  <meta property="og:image:alt" content="QUIVER">
+  <meta property="article:published_time" content="2026-06-01T00:00:00.000Z">
+  <meta property="article:author" content="Aritra Bal">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="quantum machine learning">
+  <meta property="article:tag" content="Fisher information">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QUIVER">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://etpwww.etp.kit.edu/~abal/projects/quiver/static/quiver/quiver_logo.png">
+  <meta name="twitter:image:alt" content="QUIVER">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="QUIVER: QUantum-Informed Views for Enhanced Representations in Large Machine Learning Models">
+  <meta name="citation_author" content="Bal, Aritra">
+  <meta name="citation_author" content="Binder, Michael">
+  <meta name="citation_author" content="Klute, Markus">
+  <meta name="citation_author" content="Maier, Benedikt">
+  <meta name="citation_author" content="Spannowsky, Michael">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ICML 2026 AI4Physics Workshop">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/QUIVER_ICML.pdf">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>QUIVER</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="static/quiver/quiver_logo.png">
+  <link rel="apple-touch-icon" href="static/quiver/quiver_logo.png">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- MathJax for equation rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'none'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "QUIVER: QUantum-Informed Views for Enhanced Representations in Large Machine Learning Models",
+    "description": "QUIVER enriches classical ML models with a quantum Fisher view derived from variational quantum circuits, improving jet tagging and molecular property prediction.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Aritra Bal",
+        "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}
+      },
+      {
+        "@type": "Person",
+        "name": "Michael Binder",
+        "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}
+      },
+      {
+        "@type": "Person",
+        "name": "Markus Klute",
+        "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}
+      },
+      {
+        "@type": "Person",
+        "name": "Benedikt Maier",
+        "affiliation": {"@type": "Organization", "name": "Imperial College of Science and Technology, London"}
+      },
+      {
+        "@type": "Person",
+        "name": "Michael Spannowsky",
+        "affiliation": {"@type": "Organization", "name": "Karlsruhe Institute of Technology"}
+      }
+    ],
+    "datePublished": "2026-06-01",
+    "publisher": {"@type": "Organization", "name": "ICML 2026 AI4Physics Workshop"},
+    "keywords": ["quantum machine learning", "quantum Fisher information", "variational quantum circuits", "jet physics", "molecular property prediction", "Particle Transformer", "DimeNet"],
+    "abstract": "Large machine learning models benefit substantially from multimodal inputs that provide a complementary view of the same example. We introduce QUIVER, a paradigm that enriches classical data-driven features with a quantum Fisher view computed via a variational quantum circuit.",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Karlsruhe Institute of Technology",
+    "url": "https://www.kit.edu",
+    "logo": "https://YOUR_DOMAIN.com/static/quiver/quiver_logo.png"
+  }
+  </script>
+
+  <style>
+    .affiliation-block {
+      font-size: 0.85em;
+      color: #555;
+      margin-top: 0.6rem;
+      line-height: 1.8;
+    }
+    .affiliation-block sup {
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .publication-logo {
+      width: 320px;
+      height: auto;
+      margin: 0 auto 1.2rem;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+    }
+    @media screen and (max-width: 768px) {
+      .publication-logo {
+        width: 155px;
+        margin-bottom: 1rem;
+      }
+    }
+    .results-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .results-table td, .results-table th {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .results-table td:first-child, .results-table th:first-child {
+      text-align: left;
+    }
+    .figure-caption {
+      font-size: 0.85em;
+      color: #666;
+      text-align: center;
+      margin-top: 0.6rem;
+      line-height: 1.5;
+    }
+    .math-section .content p {
+      margin-bottom: 0.8rem;
+    }
+    .eq-block {
+      margin: 1.2rem 0;
+    }
+    mjx-container[display="true"] {
+      overflow-x: visible !important;
+    }
+    .section-subtitle {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #363636;
+    }
+    .correspondence {
+      font-size: 0.82em;
+      color: #777;
+      margin-top: 0.5rem;
+    }
+    .quiver-label {
+      font-variant: small-caps;
+      letter-spacing: 0.02em;
+    }
+    .highlight-row td {
+      background-color: #eef4ff !important;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <a href="https://etpwww.etp.kit.edu/~abal/projects/1P1Q/" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>One Particle &ndash; One Qubit</h5>
+            <p>Particle physics data encoding for quantum machine learning using the 1P1Q scheme.</p>
+            <span class="work-venue">Physical Review D, 2025</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+  <!-- ===== HERO / TITLE ===== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <img
+              src="static/quiver/quiver_logo.png"
+              alt="QUIVER logo"
+              class="publication-logo"
+            >
+
+            <h1 class="title is-1 publication-title">
+              <span class="quiver-label">Quiver</span>:
+              <span class="quiver-label">QU</span>antum-<span class="quiver-label">I</span>nformed
+              <span class="quiver-label">V</span>iews for
+              <span class="quiver-label">E</span>nhanced
+              <span class="quiver-label">R</span>epresentations
+              in Large Machine Learning Models
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.itp.kit.edu/~abal/" target="_blank">Aritra Bal</a><sup>1,2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Michael Binder</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="https://www.etp.kit.edu/~klute/" target="_blank">Markus Klute</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Benedikt Maier</a><sup>3</sup>,&nbsp;</span>
+              <span class="author-block">
+                <a href="https://www.itp.kit.edu/~mspannow/" target="_blank">Michael Spannowsky</a><sup>1,4</sup>
+              </span>
+            </div>
+
+            <div class="affiliation-block">
+              <sup>1</sup>Institute of Theoretical Physics (ITP), KIT, Karlsruhe, DE &nbsp;&nbsp;
+              <sup>2</sup>Institute of Experimental Particle Physics (ETP), KIT, Karlsruhe, DE<br>
+              <sup>3</sup>Blackett Laboratory, Imperial College of Science and Technology, London, UK &nbsp;&nbsp;
+              <sup>4</sup>Institute for Quantum Materials and Technologies, KIT, Karlsruhe, DE
+            </div>
+
+            <p class="correspondence">
+              <em>ICML 2026 AI4Physics Workshop &nbsp;&middot;&nbsp; Seoul, Korea &nbsp;&middot;&nbsp;
+              Correspondence: <a href="mailto:aritra.bal@kit.edu">aritra.bal@kit.edu</a></em>
+            </p>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ABSTRACT ===== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Large machine learning models benefit substantially from multimodal inputs that
+              provide a complementary view of the same example. We introduce
+              <span class="quiver-label">Quiver</span>
+              (<span class="quiver-label">QU</span>antum-<span class="quiver-label">I</span>nformed
+              <span class="quiver-label">V</span>iews for
+              <span class="quiver-label">E</span>nhanced
+              <span class="quiver-label">R</span>epresentations),
+              a paradigm that enriches classical data-driven features with a
+              <em>quantum Fisher view</em>: a geometrically motivated,
+              basis-independent summary of higher-order correlations captured by a
+              variational quantum circuit (VQC) trained to perform the same task.
+              Unlike classical feature augmentation, the quantum Fisher information
+              matrix (QFIM) encodes the intrinsic geometry of the learned quantum
+              state manifold. While this feature map is ordinarily non-trivial to
+              model classically, it surfaces statistical structure that additional
+              classical data or model capacity finds difficult to learn, making
+              the quantum Fisher view a genuinely complementary modality rather than
+              a redundant one.
+            </p>
+            <p>
+              We demonstrate that <span class="quiver-label">Quiver</span> improves
+              standard performance metrics on two benchmark datasets from very different
+              fields: <strong>QM9</strong> for predicting molecular properties, and
+              <strong>JetClass</strong> for predicting jet flavor at the Large Hadron
+              Collider (LHC). The QFIM-augmented Particle Transformer improves both AUC
+              and QCD background rejection across all training sizes and feature sets
+              with only a \(\sim\!7\%\) parameter overhead. On the QM9 HOMO&ndash;LUMO gap
+              regression task, <span class="quiver-label">Q</span>DimeNet++ reduces the
+              mean absolute error from \(72.42 \pm 1.52\,\text{meV}\) to
+              \(67.92 \pm 1.98\,\text{meV}\), a \(6.21\%\) relative
+              improvement at a \(0.27\%\) parameter overhead. The core contribution is
+              domain-agnostic: the quantum Fisher view can be fused into a broad class
+              of model architectures via targeted modifications, well before the advent
+              of fault-tolerant quantum hardware.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== METHODS / MATH ===== -->
+  <section class="section math-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">The <span class="quiver-label">Quiver</span> Paradigm</h2>
+
+      <div class="content has-text-justified">
+
+        <h3 class="title is-4">Quantum Fisher Information Matrix</h3>
+        <p>
+          A variational quantum circuit (VQC) prepares a parameterized pure state
+        </p>
+        <div class="eq-block">
+          \[
+            |\psi(\boldsymbol{\Theta})\rangle = U(\boldsymbol{\Theta})\,|0\rangle^{\otimes N},
+            \qquad \boldsymbol{\Theta} \in \mathbb{R}^P, \tag{1}
+          \]
+        </div>
+        <p>
+          where the angles \(\boldsymbol{\Theta} = \boldsymbol{\Theta}(x)\) are functions
+          of the input \(x\) (a jet or a molecule). Because this map is smooth, the image
+          of the input manifold forms a submanifold of pure quantum states whose canonical
+          Riemannian metric is the Fubini&ndash;Study metric. On pure states this coincides,
+          up to a factor of four, with the QFIM:
+        </p>
+        <div class="eq-block">
+          \[
+            F_{ij}(\boldsymbol{\theta}) = 4\,\mathrm{Re}\!\left[
+              \langle\partial_i\psi|\partial_j\psi\rangle
+              - \langle\partial_i\psi|\psi\rangle\langle\psi|\partial_j\psi\rangle
+            \right]. \tag{2}
+          \]
+        </div>
+        <p>
+          Because the input \(x\) enters through the data-dependent state preparation
+          that precedes the trainable rotations, \(F_{ij}(\boldsymbol{\theta}_0; x)\) is
+          an <em>input-conditioned</em> object: evaluated at a fixed reference
+          \(\boldsymbol{\theta}_0\), it characterizes how the encoded state of \(x\)
+          shapes the local geometry of the trainable-parameter manifold.
+          Diagonal entries \(F_{ii}\) record per-feature dynamic importance scores;
+          off-diagonal entries \(F_{ij}\) couple distinct parameters
+          <em>coherently</em> across overlapping qubit subsystems, flagging collective
+          behavior of the corresponding input elements. This makes the QFIM a compact
+          relational tensor whose entries are directly consumable by attention layers or
+          message-passing networks.
+        </p>
+
+        <h3 class="title is-4" style="margin-top: 1.8rem;">The 2A2Q Molecular Embedding</h3>
+        <p>
+          For the QM9 molecular dataset, <span class="quiver-label">Quiver</span> uses a novel
+          <strong>two-atom&ndash;two-qubit (2A2Q)</strong> embedding. Each molecule is
+          represented as a 10-qubit system with one qubit assigned to each heavy atom
+          (unused slots are filled with randomly sampled hydrogen atoms). The objective is
+          to regress \(\Delta\epsilon = \epsilon_\text{HOMO} - \epsilon_\text{LUMO}\),
+          the HOMO&ndash;LUMO gap.
+        </p>
+        <p>
+          Starting from \(|0\rangle^{\otimes N}\), a per-atom initialization applies
+          \(R_Y(w^j_\text{atom})|0\rangle\) to each qubit \(j\), where
+          \(w^j_\text{atom}\) is a trainable parameter encoding the atomic species.
+          For bonded atom pairs \((i,j)\) satisfying \(d_{ij} < d_\text{CUTOFF} = 1.7\,\mathring{\text{A}}\),
+          a pairwise entanglement block is applied. The encoding angles are:
+        </p>
+        <div class="eq-block">
+          \[\begin{align}
+            \omega_1^{(ij)} &= e_{d_1} \cdot \Bigl(1 - \tfrac{d_{ij}}{d_\text{CUTOFF}}\Bigr)\cos\theta_{ij}, \tag{3a}\\[4pt]
+            \omega_2^{(ij)} &= e_\text{bond}^{(ij)} \cdot \pi, \tag{3b}\\[4pt]
+            \omega_3^{(ij)} &= e_{d_2} \cdot \Bigl(1 - \tfrac{d_{ij}}{d_\text{CUTOFF}}\Bigr)\cos\phi_{ij}, \tag{3c}
+          \end{align}\]
+        </div>
+        <p>
+          where \(e_{d_1}, e_{d_2}\) are learnable distance scaling parameters,
+          \(e_\text{bond}^{(ij)}\) is a learnable bond-type entanglement parameter,
+          \(d_{ij}\) is the translation-invariant pairwise distance, and \(\theta_{ij}, \phi_{ij}\) are
+          azimuthal and zenith angles.
+          The two-qubit entanglement unitary applied to the pair is:
+        </p>
+        <div class="eq-block">
+          \[
+            \mathcal{U}_{ij} =
+            \Bigl(I_{YY}(\omega_3^{(ij)})\,I_{ZZ}(\omega_2^{(ij)})\,I_{XX}(\omega_1^{(ij)})\Bigr)
+            \Bigl(R_Y(w^i_\text{atom}) \otimes R_Y(w^j_\text{atom})\Bigr)|00\rangle, \tag{4}
+          \]
+        </div>
+        <p>
+          where \(I_{XX}, I_{YY}, I_{ZZ}\) are Ising-type two-qubit interactions.
+          The circuit stacks \(N=2\) such layers. The HOMO&ndash;LUMO gap is predicted
+          from the observable
+        </p>
+        <div class="eq-block">
+          \[
+            \mathcal{H} = \sum_{i=1}^{N} c_i\, Z_i, \tag{5}
+          \]
+        </div>
+        <p>
+          where \(\{c_i\}\) are trainable coefficients. Circuit parameters are optimized
+          with the Huber loss, which interpolates between \(\ell_2\) behavior for small
+          residuals and \(\ell_1\) for large ones.
+        </p>
+        <p>
+          The resulting QFIM is a \(10 \times 10\) grid of \(6 \times 6\) sub-blocks
+          (a \(60\times 60\) real symmetric matrix), stored as 90 channels over 10 atom
+          slots. The off-diagonal sub-block \(Q_{ij}\) captures the coupling between
+          atoms \(i\) and \(j\) through the intrinsic geometry of the quantum state
+          manifold, providing a physically motivated relational prior that modulates
+          edge-state vectors in the downstream graph neural network.
+        </p>
+
+        <h3 class="title is-4" style="margin-top: 1.8rem;">Injecting the QFIM into Classical Models</h3>
+        <p>
+          <span class="quiver-label">Quiver</span> is architecture-agnostic. For <strong>transformer backbones</strong>
+          (jet classification via the Particle Transformer), the QFIM channels are
+          embedded by a Particle-Transformer-style MLP and the resulting tokens are
+          appended to the classical particle sequence, enabling implicit cross-attention
+          between quantum and classical modalities:
+        </p>
+        <div class="eq-block">
+          \[
+            \text{transformer input} = [k_1, \ldots, k_P,\; q_1, \ldots, q_P], \tag{6}
+          \]
+        </div>
+        <p>
+          where \(k_i = \mathrm{MLP}_\text{tok}(x_i) \in \mathbb{R}^{128}\) are
+          classical particle tokens and
+          \(q_i = \mathrm{MLP}_\text{QFIM}(\mathbf{Q}[:,i]) \in \mathbb{R}^{128}\)
+          are the embedded QFIM tokens.
+        </p>
+        <p>
+          For <strong>GNN backbones</strong> (molecular regression via DimeNet++),
+          the QFIM modulates the learned graph edge states via a residual multiplicative
+          gate:
+        </p>
+        <div class="eq-block">
+          \[
+            \tilde{x}_{ij}^{(l)} = \mathrm{Rescale}(x_{ij}^{(l)}, Q_{ij}, \alpha)
+            = \Bigl(1 + \alpha \cdot \Theta(Q_{ij})\Bigr)\, x_{ij}^{(l)}, \tag{7}
+          \]
+        </div>
+        <p>
+          where \(\alpha\) is a global learnable scalar initialized to zero (ensuring
+          the networks are identical at initialization) and \(\Theta(Q_{ij})\) is a
+          per-edge bounded scalar learned by a CNN applied to the \(6\times 6\) QFIM
+          sub-block, followed by a scaling MLP with a final \(\tanh\) activation.
+          This constrains the gate to \([-1, 1]\) and ensures the QFIM acts as
+          genuine geometric prior rather than generic parameter capacity.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== RESULTS ===== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Results</h2>
+
+      <!-- Jet Classification -->
+      <h3 class="title is-4">Jet Flavor Classification (JetClass)</h3>
+      <p class="has-text-justified" style="margin-bottom: 1.2rem;">
+        We evaluate <span class="quiver-label">Quiver</span> on the binary top-quark vs. QCD-background classification
+        task in the JetClass dataset, using the Particle Transformer (ParT, 2.14M
+        parameters) as the classical baseline. The <span class="quiver-label">Quiver</span>-augmented variant
+        (2.29M parameters, a \(7\%\) increase) incorporates the QFIM via sequence
+        concatenation. Results below are mean \(\pm\) std over five independent
+        seed initializations. \(1/\epsilon_B\) is the QCD background rejection
+        evaluated at signal efficiency \(\epsilon_S = 0.5\).
+      </p>
+
+      <div class="table-container" style="margin-bottom: 2rem; overflow-x: auto;">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth results-table">
+          <thead>
+            <tr>
+              <th>Features</th>
+              <th>Method</th>
+              <th><em>N</em></th>
+              <th>AUC</th>
+              <th>\(1/\epsilon_B\)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="6"><strong>Kinematics</strong></td>
+              <td rowspan="3">ParT</td>
+              <td>\(0.1\,\text{M}\)</td>
+              <td>\(0.97140 \pm 0.00038\)</td>
+              <td>\(107 \pm 2\)</td>
+            </tr>
+            <tr>
+              <td>\(0.5\,\text{M}\)</td>
+              <td>\(0.97629 \pm 0.00015\)</td>
+              <td>\(146 \pm 3\)</td>
+            </tr>
+            <tr>
+              <td>\(5\,\text{M}\)</td>
+              <td>\(0.97832 \pm 0.00004\)</td>
+              <td>\(176 \pm 1\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td rowspan="3"><strong><span class="quiver-label">Quiver</span></strong></td>
+              <td>\(0.1\,\text{M}\)</td>
+              <td>\(0.97368 \pm 0.00013\)</td>
+              <td>\(130 \pm 1\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>\(0.5\,\text{M}\)</td>
+              <td>\(0.97848 \pm 0.00045\)</td>
+              <td>\(191 \pm 9\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>\(5\,\text{M}\)</td>
+              <td><strong>\(0.98070 \pm 0.00003\)</strong></td>
+              <td><strong>\(240 \pm 1\)</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="6"><strong>Full</strong></td>
+              <td rowspan="3">ParT</td>
+              <td>\(0.1\,\text{M}\)</td>
+              <td>\(0.98875 \pm 0.00008\)</td>
+              <td>\(570 \pm 13\)</td>
+            </tr>
+            <tr>
+              <td>\(0.5\,\text{M}\)</td>
+              <td>\(0.99080 \pm 0.00017\)</td>
+              <td>\(921 \pm 13\)</td>
+            </tr>
+            <tr>
+              <td>\(5\,\text{M}\)</td>
+              <td>\(0.99235 \pm 0.00003\)</td>
+              <td>\(1306 \pm 8\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td rowspan="3"><strong><span class="quiver-label">Quiver</span></strong></td>
+              <td>\(0.1\,\text{M}\)</td>
+              <td>\(0.98893 \pm 0.00005\)</td>
+              <td>\(590 \pm 7\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>\(0.5\,\text{M}\)</td>
+              <td>\(0.99095 \pm 0.00003\)</td>
+              <td>\(951 \pm 17\)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>\(5\,\text{M}\)</td>
+              <td><strong>\(0.99244 \pm 0.00003\)</strong></td>
+              <td><strong>\(1362 \pm 28\)</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="figure-caption">
+          Table 1: Comparison of ParT and <span class="quiver-label">Quiver</span> on the top-quark tagging task.
+          <em>Kinematics</em>: kinematic features only (\(\log p_{T,\text{rel}}, \Delta\eta, \Delta\phi\)
+          plus four-vectors).
+          <em>Full</em>: kinematics plus calorimeter deposits, particle-ID flags, and
+          impact-parameter features.
+          <span class="quiver-label">Quiver</span> rows are shaded.
+        </p>
+      </div>
+
+      <!-- Molecular Regression Figure -->
+      <h3 class="title is-4" style="margin-top: 1.5rem;">Molecular Property Regression (QM9)</h3>
+      <p class="has-text-justified" style="margin-bottom: 1.2rem;">
+        QDimeNet++ reduces the test MAE on the HOMO&ndash;LUMO gap task from
+        \(72.42 \pm 1.52\,\text{meV}\) (DimeNet++ baseline) to
+        <strong>\(67.92 \pm 1.98\,\text{meV}\)</strong>, a
+        <strong>6.21% relative improvement</strong> at a 0.27% parameter overhead.
+        A paired \(t\)-test across ten seeds yields
+        \(t_9 = 5.78\) (\(p < 10^{-3}\)), confirming the improvement is
+        statistically significant and not derived from seed-level noise.
+        The mean paired difference is
+        \(\Delta\mathrm{MAE} = 4.50 \pm 2.46\,\text{meV}\),
+        remaining positive within \(\pm 1\sigma\) across all ten paired seeds.
+      </p>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <img
+            src="static/quiver/dimenet_val_mae.png"
+            alt="Validation MAE curves during training for DimeNet++ and QDimeNet++"
+            style="width: 100%; height: auto; border-radius: 6px; display: block;"
+          >
+          <p class="figure-caption">
+            Figure 1: Validation MAE during training for DimeNet++ and QDimeNet++.
+            <em>Upper panel:</em> MAE (meV) vs. epoch; solid lines show the mean across
+            \(N = 10\) paired seeds (smoothed with a 3-epoch rolling window), shaded bands
+            denote \(\pm 1\sigma\).
+            <em>Lower panel:</em> Per-epoch paired difference
+            \(\Delta\text{MAE} = \text{MAE}_\text{DimeNet++} - \text{MAE}_\text{QDimeNet++}\);
+            positive values indicate lower MAE for QDimeNet++.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== BIBTEX ===== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{bal2026quiver,
+  title   = {{QUIVER}: {QU}antum-{I}nformed {V}iews for {E}nhanced {R}epresentations
+             in Large Machine Learning Models},
+  author  = {Bal, Aritra and Binder, Michael and Klute, Markus and
+             Maier, Benedikt and Spannowsky, Michael},
+  booktitle = {ICML 2026 Workshop on AI for Physics (AI4Physics)},
+  year      = {2026},
+  address   = {Seoul, Korea},
+  note      = {arXiv:XXXX.XXXXX}
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>
+              which was adopted from the
+              <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you
+              link back to this page in the footer.<br>
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+                Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </main>
+</body>
+</html>
