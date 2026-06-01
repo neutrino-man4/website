@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Dr. Aritra Bal</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../icons/etp_logo_color_de.png">
+  <style>
+    .projects-main {
+      flex: 1;
+      margin-top: var(--nav-h);
+      padding: clamp(3rem, 7vh, 5rem) clamp(1.5rem, 6vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .projects-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .projects-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
+
+    .projects-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .projects-subtitle {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid rgba(122, 158, 126, 0.18);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .project-card:hover {
+      border-color: rgba(77, 122, 82, 0.35);
+      box-shadow: 0 8px 32px rgba(77, 122, 82, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .project-card__logo-wrap {
+      background: var(--cream);
+      border-bottom: 1px solid rgba(122, 158, 126, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.2rem 2rem;
+      min-height: 160px;
+    }
+
+    .project-card__logo {
+      max-height: 80px;
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .project-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      padding: 1.6rem 1.8rem;
+    }
+
+    .project-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    .project-card__desc {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .project-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-card__tag {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: var(--sage-bg);
+      border-radius: 3px;
+      padding: 0.2rem 0.55rem;
+    }
+
+    .project-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: gap var(--transition);
+    }
+
+    .project-card__link:hover { gap: 0.8rem; }
+
+    .project-card__link svg {
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .project-card__link:hover svg { transform: translateX(3px); }
+
+    @media (max-width: 720px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .projects-main {
+        padding: 2rem 1.2rem 2.5rem;
+        gap: 2rem;
+      }
+      .project-card__logo-wrap {
+        min-height: 130px;
+        padding: 1.6rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ───────────────────── NAVBAR ───────────────────── -->
+  <header class="navbar">
+    <div class="navbar__brand">
+      <a href="../index.html" style="text-decoration:none">
+        <span class="navbar__name">Dr. Aritra Bal, PhD</span>
+        <span class="navbar__title">Particle Physicist &amp; ML Researcher</span>
+      </a>
+    </div>
+    <nav class="navbar__links">
+      <a href="../index.html"        class="nav-link">Home</a>
+      <a href="../about.html"        class="nav-link">About Me</a>
+      <a href="../research.html"     class="nav-link">Research</a>
+      <a href="../publications.html" class="nav-link">Publications</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="../index.html"        class="nav-link">Home</a>
+    <a href="../about.html"        class="nav-link">About Me</a>
+    <a href="../research.html"     class="nav-link">Research</a>
+    <a href="../publications.html" class="nav-link">Publications</a>
+  </div>
+
+  <!-- ───────────────────── MAIN ───────────────────── -->
+  <main class="projects-main">
+
+    <div class="projects-header">
+      <span class="projects-label">Research</span>
+      <h1 class="projects-title">Projects</h1>
+      <p class="projects-subtitle">
+        Project pages for selected research works, with interactive figures, code, and paper links.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- 1P1Q -->
+      <article class="project-card">
+        <div class="project-card__logo-wrap">
+          <img src="1P1Q/static/1P1Q/1p1q_logo.png" alt="1P1Q logo" class="project-card__logo" />
+        </div>
+        <div class="project-card__body">
+          <h2 class="project-card__name">1P1Q</h2>
+          <p class="project-card__desc">
+            A lossless quantum encoding scheme assigning each jet constituent to a single qubit via
+            spherical Bloch-sphere coordinates. Demonstrated via a quantum autoencoder for anomaly
+            detection and a variational quantum circuit for top-quark jet tagging, validated on real
+            CMS experimental data.
+          </p>
+          <div class="project-card__tags">
+            <span class="project-card__tag">Quantum ML</span>
+            <span class="project-card__tag">Jet Physics</span>
+            <span class="project-card__tag">Anomaly Detection</span>
+          </div>
+          <a href="1P1Q/index.html" class="project-card__link">
+            View project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- QUIVER -->
+      <article class="project-card">
+        <div class="project-card__logo-wrap">
+          <img src="quiver/static/quiver/quiver_logo.png" alt="QUIVER logo" class="project-card__logo" />
+        </div>
+        <div class="project-card__body">
+          <h2 class="project-card__name">QUIVER</h2>
+          <p class="project-card__desc">
+            Enriches classical ML models with a quantum Fisher information view derived from
+            variational quantum circuits, yielding richer feature representations. Demonstrates
+            improved jet tagging at the LHC and molecular property prediction on the QM9 dataset.
+          </p>
+          <div class="project-card__tags">
+            <span class="project-card__tag">Quantum Fisher</span>
+            <span class="project-card__tag">Jet Tagging</span>
+            <span class="project-card__tag">Molecular ML</span>
+          </div>
+          <a href="quiver/index.html" class="project-card__link">
+            View project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="footer__links">
+
+      <a href="https://github.com/neutrino-man4" target="_blank" rel="noopener" class="footer__icon-link" aria-label="GitHub">
+        <img src="../icons/github.svg" alt="" class="footer__icon" />
+        <span>GitHub</span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="https://scholar.google.com/citations?user=IcomXjAAAAAJ&hl=en" target="_blank" rel="noopener" class="footer__icon-link" aria-label="Google Scholar">
+        <img src="../icons/scholar.svg" alt="" class="footer__icon" />
+        <span>Google Scholar</span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="mailto:aritra.bal@dont-spam-kit.edu" class="footer__icon-link" aria-label="Email">
+        <img src="../icons/mail.svg" alt="" class="footer__icon" />
+        <span>E-Mail</span>
+      </a>
+
+      <span class="footer__sep"></span>
+
+      <a href="https://inspirehep.net/authors/1809400" target="_blank" rel="noopener" class="footer__icon-link" aria-label="INSPIRE-HEP">
+        <img src="../icons/inspirehep.png" alt="" class="footer__icon footer__inspire-icon" />
+        <span>INSPIRE-HEP</span>
+      </a>
+
+    </div>
+    <div class="footer__right">
+      <p class="footer__plots-hint">Click <a href="https://etpwww.etp.kit.edu/~abal/plots/" target="_blank" rel="noopener" class="footer__plots-link">here</a> for plots</p>
+      <p class="footer__copy">&copy; 2026 Aritra Bal &nbsp;&middot;&nbsp; Karlsruhe Institute of Technology</p>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
