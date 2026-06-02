@@ -81,7 +81,118 @@
   </noscript>
 
   <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Site navbar styles -->
+  <style>
+    .site-navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      background: rgba(245, 243, 239, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(122, 158, 126, 0.18);
+      z-index: 10000;
+      gap: 1rem;
+    }
+    .site-navbar__brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .site-navbar__name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #1c1e1b;
+      line-height: 1.15;
+    }
+    .site-navbar__title {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8a8d88;
+    }
+    .site-navbar__links {
+      display: flex;
+      gap: 2.4rem;
+      align-items: center;
+    }
+    .site-nav-link {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #4a4d48;
+      position: relative;
+      transition: color 0.28s ease;
+      text-decoration: none;
+    }
+    .site-nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1.5px;
+      background: #4d7a52;
+      transition: width 0.28s ease;
+    }
+    .site-nav-link:hover { color: #4d7a52; }
+    .site-nav-link:hover::after { width: 100%; }
+    .site-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .site-hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: #1c1e1b;
+      transition: 0.28s ease;
+    }
+    .site-mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: #f5f3ef;
+      border-bottom: 1px solid #ece9e3;
+      z-index: 9999;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .site-mobile-nav.open { max-height: 260px; }
+    .site-mobile-nav .site-nav-link {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ece9e3;
+      font-size: 0.88rem;
+      display: block;
+    }
+    #main-content { margin-top: 72px; }
+    .more-works-container { top: calc(72px + 1rem) !important; }
+    @media (max-width: 640px) {
+      .site-navbar__links { display: none; }
+      .site-hamburger { display: flex; }
+      .site-mobile-nav { display: flex; }
+      .site-navbar__title { display: none; }
+    }
+  </style>
 
   <!-- MathJax for equation rendering -->
   <script>
@@ -102,6 +213,35 @@
   <script defer src="static/js/bulma-carousel.js"></script>
   <script defer src="static/js/bulma-slider.js"></script>
   <script defer src="static/js/index.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById('siteHamburger');
+      var nav = document.getElementById('siteMobileNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        var spans = btn.querySelectorAll('span');
+        if (open) {
+          spans[0].style.cssText = 'transform:translateY(6.5px) rotate(45deg)';
+          spans[1].style.cssText = 'opacity:0;transform:scaleX(0)';
+          spans[2].style.cssText = 'transform:translateY(-6.5px) rotate(-45deg)';
+        } else {
+          spans.forEach(function (s) { s.style.cssText = ''; });
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('open');
+          btn.querySelectorAll('span').forEach(function (s) { s.style.cssText = ''; });
+        }
+      });
+      var nb = document.querySelector('.site-navbar');
+      window.addEventListener('scroll', function () {
+        nb.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.07)' : 'none';
+      }, { passive: true });
+    })();
+  </script>
 
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
@@ -232,6 +372,30 @@
 </head>
 <body>
 
+  <!-- ───────────────────── NAVBAR ───────────────────── -->
+  <header class="site-navbar">
+    <div class="site-navbar__brand">
+      <span class="site-navbar__name">Dr. Aritra Bal, PhD</span>
+      <span class="site-navbar__title">Particle Physicist &amp; ML Researcher</span>
+    </div>
+    <nav class="site-navbar__links">
+      <a href="../../index.html"        class="site-nav-link">Home</a>
+      <a href="../../about.html"        class="site-nav-link">About Me</a>
+      <a href="../../research.html"     class="site-nav-link">Research</a>
+      <a href="../../publications.html" class="site-nav-link">Publications</a>
+    </nav>
+    <button class="site-hamburger" id="siteHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <div class="site-mobile-nav" id="siteMobileNav">
+    <a href="../../index.html"        class="site-nav-link">Home</a>
+    <a href="../../about.html"        class="site-nav-link">About Me</a>
+    <a href="../../research.html"     class="site-nav-link">Research</a>
+    <a href="../../publications.html" class="site-nav-link">Publications</a>
+  </div>
 
   <!-- Scroll to Top Button -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
