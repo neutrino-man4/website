@@ -35,6 +35,10 @@
     6: {
       title: 'From Information Geometry to Jet Substructure: A Triality of Cumulant Tensors, Energy Correlators, and Hypergraphs',
       code: '@misc{bal2026informationgeometryjetsubstructure,\n  title         = {From Information Geometry to Jet Substructure: A Triality of Cumulant Tensors, Energy Correlators, and Hypergraphs},\n  author        = {Aritra Bal and Markus Klute and Benedikt Maier and Michael Spannowsky},\n  year          = {2026},\n  eprint        = {2605.03063},\n  archivePrefix = {arXiv},\n  primaryClass  = {hep-ph},\n  url           = {https://arxiv.org/abs/2605.03063}\n}'
+    },
+    7: {
+      title: 'QUIVER: Quantum-Informed Views for Enhanced Representations in Large ML Models',
+      code: '@misc{bal2026quiverquantuminformedviewsenhanced,\n  title         = {QUIVER: Quantum-Informed Views for Enhanced Representations in Large ML Models},\n  author        = {Aritra Bal and Michael Binder and Markus Klute and Benedikt Maier and Michael Spannowsky},\n  year          = {2026},\n  eprint        = {2606.02785},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.LG},\n  url           = {https://arxiv.org/abs/2606.02785}\n}'
     }
 
   };
