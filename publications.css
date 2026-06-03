@@ -393,6 +393,18 @@
   border-color: var(--ink);
 }
 
+/* Website */
+.pub-link--website {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+.pub-link--website:hover {
+  background: #3d3d3d;
+  color: #ffffff;
+  border-color: #3d3d3d;
+}
+
 /* GitHub */
 .pub-link--github {
   background: rgba(80, 93, 112, 0.09);
