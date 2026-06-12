@@ -961,3 +961,53 @@ html[data-theme="dark"]::-webkit-scrollbar-thumb { background: #009682; border-r
 
 [data-theme="dark"] #compare-modal .modal-content { background: #0d0d12; border-color: #1e2235; }
 [data-theme="dark"] #compare-modal .modal-header { background: #13151e; border-bottom-color: #2e3455; }
+
+.compare-folder-label {
+	font-size: 0.68rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.09em;
+	color: #adb5bd;
+	margin: 0 0 7px 2px;
+}
+
+.compare-empty-msg {
+	font-size: 0.75rem;
+	color: #adb5bd;
+	text-align: center;
+	padding: 18px 0;
+	margin: 0;
+}
+
+.compare-footer-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.compare-footer-meta span {
+	font-size: 0.7rem;
+	color: #adb5bd;
+}
+
+.compare-clear-btn {
+	background: none;
+	border: none;
+	font-size: 0.72rem;
+	color: #adb5bd;
+	cursor: pointer;
+	padding: 2px 4px;
+	border-radius: 4px;
+	transition: color 0.14s;
+	line-height: 1;
+}
+
+.compare-clear-btn:not(:disabled):hover { color: #dc3545; }
+.compare-clear-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+[data-theme="dark"] .compare-folder-label { color: #3a4060; }
+[data-theme="dark"] .compare-empty-msg { color: #3a4060; }
+[data-theme="dark"] .compare-footer-meta span { color: #3a4060; }
+[data-theme="dark"] .compare-clear-btn { color: #3a4060; }
+[data-theme="dark"] .compare-clear-btn:not(:disabled):hover { color: #d8708a; }
