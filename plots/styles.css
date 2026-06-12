@@ -983,6 +983,136 @@ html[data-theme="dark"]::-webkit-scrollbar-thumb { background: #009682; border-r
 [data-theme="dark"] #compare-modal .modal-content { background: #0d0d12; border-color: #1e2235; }
 [data-theme="dark"] #compare-modal .modal-header { background: #13151e; border-bottom-color: #2e3455; }
 
+/* ===== Compare hint overlay (shown once per session) ===== */
+@media (max-width: 991.98px) {
+	.compare-hint-overlay { display: none !important; }
+}
+
+.compare-hint-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 600;
+	background: rgba(0,0,0,0.76);
+	animation: hint-bg-in 0.3s ease both;
+}
+
+@keyframes hint-bg-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Replica of the FAB, rendered inside the overlay so it "glows through" the backdrop */
+.compare-hint-spot {
+	position: absolute;
+	left: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	background: #009682;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.05rem;
+	pointer-events: none;
+	animation: hint-spot-in 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.15s both;
+	box-shadow: 0 3px 14px rgba(0,150,130,0.5);
+}
+
+@keyframes hint-spot-in {
+	from { transform: translateY(-50%) scale(0.6); opacity: 0; }
+	to   { transform: translateY(-50%) scale(1);   opacity: 1; }
+}
+
+.compare-hint-spot::before,
+.compare-hint-spot::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	border: 2px solid rgba(0,196,170,0.65);
+	animation: hint-ring 2s ease-out infinite;
+}
+
+.compare-hint-spot::after { animation-delay: 0.75s; }
+
+@keyframes hint-ring {
+	0%   { inset: 0;     opacity: 1; }
+	100% { inset: -24px; opacity: 0; }
+}
+
+.compare-hint-card {
+	position: absolute;
+	left: 72px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #fff;
+	border-radius: 12px;
+	padding: 20px 22px;
+	width: 285px;
+	box-shadow: 0 16px 52px rgba(0,0,0,0.45), 0 3px 14px rgba(0,0,0,0.25);
+	animation: hint-card-in 0.4s cubic-bezier(0.22,0.61,0.36,1) 0.22s both;
+}
+
+@keyframes hint-card-in {
+	from { opacity: 0; transform: translateY(-50%) translateX(-10px); }
+	to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+/* Left-pointing arrow notch */
+.compare-hint-card::before {
+	content: '';
+	position: absolute;
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid #fff;
+}
+
+.compare-hint-label {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 0.76rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #009682;
+	margin: 0 0 8px 0;
+}
+
+.compare-hint-text {
+	font-size: 0.85rem;
+	line-height: 1.56;
+	color: #3a4060;
+	margin: 0 0 16px 0;
+}
+
+.compare-hint-ok {
+	width: 100%;
+	background: #009682;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 9px 14px;
+	font-size: 0.82rem;
+	font-weight: 600;
+	cursor: pointer;
+	letter-spacing: 0.04em;
+	transition: background 0.15s;
+}
+
+.compare-hint-ok:hover { background: #007a69; }
+
+[data-theme="dark"] .compare-hint-card { background: #1e2235; }
+[data-theme="dark"] .compare-hint-card::before { border-right-color: #1e2235; }
+[data-theme="dark"] .compare-hint-label { color: #00c4aa; }
+[data-theme="dark"] .compare-hint-text { color: #b0b8d8; }
+
 .compare-folder-label {
 	font-size: 0.68rem;
 	font-weight: 700;
