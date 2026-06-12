@@ -1773,6 +1773,78 @@ $listUrl = htmlspecialchars(str_replace('view', 'index', "http://$_SERVER[HTTP_H
 			backdrop.addEventListener('click', closeDrawer);
 			document.getElementById('compare-clear-btn').addEventListener('click', clearAll);
 
+			// Single document-level pan state — only one cell pans at a time
+			var _panMove = null, _panEnd = null;
+			document.addEventListener('mousemove', function(e) { if (_panMove) _panMove(e); });
+			document.addEventListener('mouseup',   function()  { if (_panEnd)  { _panEnd(); _panEnd = null; _panMove = null; } });
+
+			function initCellZoom(cell) {
+				var vp  = cell.querySelector('.compare-cell-viewport');
+				var cvs = cell.querySelector('.compare-cell-canvas');
+				var zs = 1, zx = 0, zy = 0;
+
+				function apply() {
+					cvs.style.transform = 'translate(' + zx + 'px,' + zy + 'px) scale(' + zs + ')';
+					vp.style.cursor = zs > 1 ? 'grab' : 'zoom-in';
+				}
+
+				function zoomTo(cx, cy, f) {
+					var ns = Math.min(15, Math.max(0.25, zs * f));
+					if (ns === zs) return;
+					var r = ns / zs;
+					zx = cx - (cx - zx) * r;
+					zy = cy - (cy - zy) * r;
+					zs = ns; apply();
+				}
+
+				vp.addEventListener('wheel', function(e) {
+					e.preventDefault();
+					var rect = vp.getBoundingClientRect();
+					zoomTo(e.clientX - rect.left, e.clientY - rect.top, e.deltaY < 0 ? 1.12 : 1/1.12);
+				}, { passive: false });
+
+				vp.addEventListener('mousedown', function(e) {
+					if (e.button !== 0) return;
+					e.preventDefault();
+					var sx = e.clientX - zx, sy = e.clientY - zy;
+					vp.style.cursor = 'grabbing';
+					_panMove = function(ev) { zx = ev.clientX - sx; zy = ev.clientY - sy; apply(); };
+					_panEnd  = function() { vp.style.cursor = zs > 1 ? 'grab' : 'zoom-in'; };
+				});
+
+				vp.addEventListener('dblclick', function(e) {
+					var rect = vp.getBoundingClientRect();
+					if (zs !== 1) { zs = 1; zx = 0; zy = 0; apply(); }
+					else zoomTo(e.clientX - rect.left, e.clientY - rect.top, 3);
+				});
+
+				var lastDist = null, tpx = 0, tpy = 0, isTp = false;
+				vp.addEventListener('touchstart', function(e) {
+					if (e.touches.length === 2) {
+						lastDist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+						isTp = false; e.preventDefault();
+					} else if (e.touches.length === 1) {
+						isTp = true; tpx = e.touches[0].clientX - zx; tpy = e.touches[0].clientY - zy; e.preventDefault();
+					}
+				}, { passive: false });
+				vp.addEventListener('touchmove', function(e) {
+					if (e.touches.length === 2 && lastDist !== null) {
+						var dist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+						var rect = vp.getBoundingClientRect();
+						zoomTo((e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left,
+							   (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top,
+							   dist / lastDist);
+						lastDist = dist; e.preventDefault();
+					} else if (e.touches.length === 1 && isTp) {
+						zx = e.touches[0].clientX - tpx; zy = e.touches[0].clientY - tpy;
+						apply(); e.preventDefault();
+					}
+				}, { passive: false });
+				vp.addEventListener('touchend', function() { lastDist = null; isTp = false; });
+
+				apply();
+			}
+
 			document.getElementById('compare-go-btn').addEventListener('click', function() {
 				if (selected.length < 2) return;
 				var canvas = document.getElementById('compare-canvas');
@@ -1782,9 +1854,12 @@ $listUrl = htmlspecialchars(str_replace('view', 'index', "http://$_SERVER[HTTP_H
 					var cell = document.createElement('div');
 					cell.className = 'compare-canvas-cell';
 					cell.innerHTML =
-						'<img src="' + esc(s.url) + '" alt="' + esc(s.name) + '" loading="lazy">' +
+						'<div class="compare-cell-viewport"><div class="compare-cell-canvas">' +
+						'<img src="' + esc(s.url) + '" alt="' + esc(s.name) + '" loading="lazy" draggable="false">' +
+						'</div></div>' +
 						'<div class="compare-cell-name">' + esc(s.name) + '</div>';
 					canvas.appendChild(cell);
+					initCellZoom(cell);
 				});
 				closeDrawer();
 				if (!cmpModal) cmpModal = new bootstrap.Modal(document.getElementById('compare-modal'));
