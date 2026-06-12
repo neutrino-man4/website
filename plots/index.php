@@ -1650,13 +1650,19 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 			<button id="compare-drawer-close" class="btn-close" aria-label="Close"></button>
 		</div>
 		<div class="compare-drawer-body">
+			<p class="compare-folder-label"><i class="bi bi-folder2-open me-1"></i>This folder</p>
 			<div id="compare-image-list" class="compare-image-list"></div>
+			<p id="compare-empty-msg" class="compare-empty-msg" style="display:none;">No images in this folder.</p>
 		</div>
 		<div class="compare-drawer-footer">
 			<div id="compare-tray" class="compare-tray"></div>
+			<div class="compare-footer-meta">
+				<span id="compare-sel-count">0 of 4 selected</span>
+				<button id="compare-clear-btn" class="compare-clear-btn" disabled>Clear all</button>
+			</div>
 			<button id="compare-go-btn" class="compare-go-btn" disabled>
 				<i class="bi bi-layout-split"></i>
-				<span id="compare-go-label">Compare images</span>
+				<span id="compare-go-label">Select 2–4 images</span>
 			</button>
 		</div>
 	</aside>
@@ -1703,9 +1709,16 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 	<script>
 		(function() {
 			var MAX = 4;
-			var selected = [];
+			var STORE = 'etp_compare';
 			var allImages = [];
 			var cmpModal = null;
+
+			// Load persisted selections (survive page navigation)
+			var selected = [];
+			try {
+				var raw = localStorage.getItem(STORE);
+				if (raw) { var p = JSON.parse(raw); if (Array.isArray(p)) selected = p; }
+			} catch(e) {}
 
 			document.querySelectorAll('.lightbox-trigger').forEach(function(el) {
 				var url = el.dataset.imgUrl, name = el.dataset.plotName;
@@ -1715,40 +1728,58 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 			});
 
 			var fab = document.getElementById('compare-fab');
-			if (!allImages.length) { if (fab) fab.style.display = 'none'; return; }
+			// Show FAB if current page has images OR if there are persisted selections
+			if (!allImages.length && !selected.length) { if (fab) fab.style.display = 'none'; return; }
 
 			var listEl = document.getElementById('compare-image-list');
-			allImages.forEach(function(img, i) {
-				var div = document.createElement('div');
-				div.className = 'compare-image-item';
-				div.dataset.i = i;
-				div.innerHTML =
-					'<img class="compare-thumb" src="' + esc(img.thumb) + '" alt="" loading="lazy">' +
-					'<span class="compare-item-name">' + esc(img.name) + '</span>' +
-					'<span class="compare-item-check"><i class="bi bi-check2"></i></span>';
-				div.addEventListener('click', function() { toggle(i); });
-				listEl.appendChild(div);
-			});
+
+			if (allImages.length) {
+				allImages.forEach(function(img) {
+					var div = document.createElement('div');
+					div.className = 'compare-image-item';
+					div.dataset.url = img.url;
+					div.innerHTML =
+						'<img class="compare-thumb" src="' + esc(img.thumb) + '" alt="" loading="lazy">' +
+						'<span class="compare-item-name">' + esc(img.name) + '</span>' +
+						'<span class="compare-item-check"><i class="bi bi-check2"></i></span>';
+					div.addEventListener('click', function() { toggle(img); });
+					listEl.appendChild(div);
+				});
+			} else {
+				document.getElementById('compare-empty-msg').style.display = '';
+			}
 
 			function esc(s) {
 				return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 			}
 
-			function toggle(i) {
-				var pos = selected.findIndex(function(s) { return s.i === i; });
+			function save() {
+				try { localStorage.setItem(STORE, JSON.stringify(selected)); } catch(e) {}
+			}
+
+			function toggle(img) {
+				var pos = selected.findIndex(function(s) { return s.url === img.url; });
 				if (pos >= 0) selected.splice(pos, 1);
-				else if (selected.length < MAX) selected.push(Object.assign({ i: i }, allImages[i]));
+				else if (selected.length < MAX) selected.push({ url: img.url, name: img.name, thumb: img.thumb });
+				save();
+				refresh();
+			}
+
+			function clearAll() {
+				selected = [];
+				save();
 				refresh();
 			}
 
 			function refresh() {
+				// Mark current-page list items
 				listEl.querySelectorAll('.compare-image-item').forEach(function(el) {
-					var i = +el.dataset.i;
-					var on = selected.some(function(s) { return s.i === i; });
+					var on = selected.some(function(s) { return s.url === el.dataset.url; });
 					el.classList.toggle('selected', on);
 					el.classList.toggle('disabled', !on && selected.length >= MAX);
 				});
 
+				// Tray (shows all selections across all folders)
 				var tray = document.getElementById('compare-tray');
 				tray.innerHTML = '';
 				for (var k = 0; k < MAX; k++) {
@@ -1763,6 +1794,7 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 						slot.querySelector('.tray-remove').addEventListener('click', function(e) {
 							e.stopPropagation();
 							selected.splice(+this.dataset.k, 1);
+							save();
 							refresh();
 						});
 					} else {
@@ -1772,9 +1804,11 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 				}
 
 				var n = selected.length;
-				var btn = document.getElementById('compare-go-btn');
-				btn.disabled = n < 2;
-				document.getElementById('compare-go-label').textContent = n >= 2 ? 'Compare ' + n + ' images' : 'Compare images';
+				document.getElementById('compare-sel-count').textContent = n + ' of ' + MAX + ' selected';
+				document.getElementById('compare-clear-btn').disabled = (n === 0);
+				var goBtn = document.getElementById('compare-go-btn');
+				goBtn.disabled = n < 2;
+				document.getElementById('compare-go-label').textContent = n >= 2 ? 'Compare ' + n + ' images' : 'Select 2–4 images';
 				var badge = document.getElementById('compare-fab-badge');
 				badge.textContent = n;
 				badge.classList.toggle('visible', n > 0);
@@ -1787,6 +1821,7 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 			fab.addEventListener('click', openDrawer);
 			document.getElementById('compare-drawer-close').addEventListener('click', closeDrawer);
 			backdrop.addEventListener('click', closeDrawer);
+			document.getElementById('compare-clear-btn').addEventListener('click', clearAll);
 
 			document.getElementById('compare-go-btn').addEventListener('click', function() {
 				if (selected.length < 2) return;
