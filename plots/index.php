@@ -1666,6 +1666,15 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 			</button>
 		</div>
 	</aside>
+	<!-- Compare hint overlay (once per session) -->
+	<div id="compare-hint" class="compare-hint-overlay" style="display:none;" role="dialog" aria-label="Compare tool introduction">
+		<div class="compare-hint-spot"><i class="bi bi-columns-gap"></i></div>
+		<div class="compare-hint-card">
+			<p class="compare-hint-label"><i class="bi bi-columns-gap"></i>Compare Plots</p>
+			<p class="compare-hint-text">Use this tool to select up to 4 plots — across any folder — and compare them side by side.</p>
+			<button id="compare-hint-ok" class="compare-hint-ok">Understood</button>
+		</div>
+	</div>
 	<!-- Comparison Canvas Modal -->
 	<div class="modal fade" id="compare-modal" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" style="max-width:96vw;width:96vw;margin:2vh auto;">
@@ -1917,6 +1926,23 @@ $galleryUrl = htmlspecialchars(str_replace('/?', '/view.php?', str_replace('inde
 			});
 
 			refresh();
+		})();
+	</script>
+	<script>
+		(function() {
+			if (window.innerWidth < 992) return;
+			if (sessionStorage.getItem('etp_hint_compare')) return;
+			var fab = document.getElementById('compare-fab');
+			if (!fab || fab.style.display === 'none') return;
+			var overlay = document.getElementById('compare-hint');
+			if (!overlay) return;
+			overlay.style.display = 'block';
+			document.getElementById('compare-hint-ok').addEventListener('click', function() {
+				sessionStorage.setItem('etp_hint_compare', '1');
+				overlay.style.transition = 'opacity 0.28s ease';
+				overlay.style.opacity = '0';
+				setTimeout(function() { overlay.style.display = 'none'; }, 300);
+			});
 		})();
 	</script>
 </body>
