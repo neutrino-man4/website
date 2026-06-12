@@ -1307,6 +1307,44 @@ $listUrl = htmlspecialchars(str_replace('view', 'index', "http://$_SERVER[HTTP_H
 		</div>
 	</div>
 
+	<!-- Compare Tool (desktop only) -->
+	<button id="compare-fab" class="compare-fab" title="Compare images" aria-label="Open image comparison">
+		<i class="bi bi-columns-gap"></i>
+		<span id="compare-fab-badge" class="compare-fab-badge">0</span>
+	</button>
+	<div id="compare-backdrop" class="compare-drawer-backdrop"></div>
+	<aside id="compare-drawer" class="compare-drawer" aria-label="Image comparison panel">
+		<div class="compare-drawer-header">
+			<h6><i class="bi bi-columns-gap me-1"></i>Compare</h6>
+			<button id="compare-drawer-close" class="btn-close" aria-label="Close"></button>
+		</div>
+		<div class="compare-drawer-body">
+			<div id="compare-image-list" class="compare-image-list"></div>
+		</div>
+		<div class="compare-drawer-footer">
+			<div id="compare-tray" class="compare-tray"></div>
+			<button id="compare-go-btn" class="compare-go-btn" disabled>
+				<i class="bi bi-layout-split"></i>
+				<span id="compare-go-label">Compare images</span>
+			</button>
+		</div>
+	</aside>
+	<!-- Comparison Canvas Modal -->
+	<div class="modal fade" id="compare-modal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" style="max-width:96vw;width:96vw;margin:2vh auto;">
+			<div class="modal-content" style="height:94vh;display:flex;flex-direction:column;background:#111;border-color:#222;">
+				<div class="modal-header py-2" style="background:#111;border-bottom-color:#222;">
+					<span style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#009682;">
+						<i class="bi bi-columns-gap me-1"></i>Comparison
+					</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter:invert(1) brightness(0.7);"></button>
+				</div>
+				<div class="modal-body p-0" style="flex:1;overflow:hidden;background:#111;">
+					<div id="compare-canvas" class="compare-canvas"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	<?php if ($listing->enableMultiFileUploads): ?>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -1610,6 +1648,115 @@ $listUrl = htmlspecialchars(str_replace('view', 'index', "http://$_SERVER[HTTP_H
 				applyFilter();
 				syncBtn();
 			});
+		})();
+	</script>
+	<script>
+		(function() {
+			var MAX = 4;
+			var selected = [];
+			var allImages = [];
+			var cmpModal = null;
+
+			document.querySelectorAll('.lightbox-trigger').forEach(function(el) {
+				var url = el.dataset.imgUrl, name = el.dataset.plotName;
+				if (!url || !name) return;
+				var img = el.querySelector('img');
+				allImages.push({ url: url, name: name, thumb: img ? img.src : url });
+			});
+
+			var fab = document.getElementById('compare-fab');
+			if (!allImages.length) { if (fab) fab.style.display = 'none'; return; }
+
+			var listEl = document.getElementById('compare-image-list');
+			allImages.forEach(function(img, i) {
+				var div = document.createElement('div');
+				div.className = 'compare-image-item';
+				div.dataset.i = i;
+				div.innerHTML =
+					'<img class="compare-thumb" src="' + esc(img.thumb) + '" alt="" loading="lazy">' +
+					'<span class="compare-item-name">' + esc(img.name) + '</span>' +
+					'<span class="compare-item-check"><i class="bi bi-check2"></i></span>';
+				div.addEventListener('click', function() { toggle(i); });
+				listEl.appendChild(div);
+			});
+
+			function esc(s) {
+				return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+			}
+
+			function toggle(i) {
+				var pos = selected.findIndex(function(s) { return s.i === i; });
+				if (pos >= 0) selected.splice(pos, 1);
+				else if (selected.length < MAX) selected.push(Object.assign({ i: i }, allImages[i]));
+				refresh();
+			}
+
+			function refresh() {
+				listEl.querySelectorAll('.compare-image-item').forEach(function(el) {
+					var i = +el.dataset.i;
+					var on = selected.some(function(s) { return s.i === i; });
+					el.classList.toggle('selected', on);
+					el.classList.toggle('disabled', !on && selected.length >= MAX);
+				});
+
+				var tray = document.getElementById('compare-tray');
+				tray.innerHTML = '';
+				for (var k = 0; k < MAX; k++) {
+					var slot = document.createElement('div');
+					slot.className = 'compare-tray-slot' + (k < selected.length ? ' filled' : '');
+					if (k < selected.length) {
+						var s = selected[k];
+						slot.innerHTML =
+							'<img src="' + esc(s.thumb) + '" alt="">' +
+							'<span class="tray-num">' + (k + 1) + '</span>' +
+							'<button class="tray-remove" data-k="' + k + '" title="Remove"><i class="bi bi-x"></i></button>';
+						slot.querySelector('.tray-remove').addEventListener('click', function(e) {
+							e.stopPropagation();
+							selected.splice(+this.dataset.k, 1);
+							refresh();
+						});
+					} else {
+						slot.textContent = (k + 1);
+					}
+					tray.appendChild(slot);
+				}
+
+				var n = selected.length;
+				var btn = document.getElementById('compare-go-btn');
+				btn.disabled = n < 2;
+				document.getElementById('compare-go-label').textContent = n >= 2 ? 'Compare ' + n + ' images' : 'Compare images';
+				var badge = document.getElementById('compare-fab-badge');
+				badge.textContent = n;
+				badge.classList.toggle('visible', n > 0);
+			}
+
+			var drawer = document.getElementById('compare-drawer');
+			var backdrop = document.getElementById('compare-backdrop');
+			function openDrawer() { drawer.classList.add('open'); backdrop.classList.add('open'); }
+			function closeDrawer() { drawer.classList.remove('open'); backdrop.classList.remove('open'); }
+			fab.addEventListener('click', openDrawer);
+			document.getElementById('compare-drawer-close').addEventListener('click', closeDrawer);
+			backdrop.addEventListener('click', closeDrawer);
+
+			document.getElementById('compare-go-btn').addEventListener('click', function() {
+				if (selected.length < 2) return;
+				var canvas = document.getElementById('compare-canvas');
+				canvas.innerHTML = '';
+				canvas.dataset.count = selected.length;
+				selected.forEach(function(s) {
+					var cell = document.createElement('div');
+					cell.className = 'compare-canvas-cell';
+					cell.innerHTML =
+						'<img src="' + esc(s.url) + '" alt="' + esc(s.name) + '" loading="lazy">' +
+						'<div class="compare-cell-name">' + esc(s.name) + '</div>';
+					canvas.appendChild(cell);
+				});
+				closeDrawer();
+				if (!cmpModal) cmpModal = new bootstrap.Modal(document.getElementById('compare-modal'));
+				cmpModal.show();
+			});
+
+			refresh();
 		})();
 	</script>
 </body>
