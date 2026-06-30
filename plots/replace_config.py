@@ -5,7 +5,6 @@ Author: Aritra Bal (ETP)
 Date: 2026-06-30
 """
 
-import os
 from pathlib import Path
 
 
@@ -18,8 +17,8 @@ REPLACEMENTS: dict[str, str] = {
 }
 
 TARGET_FILES: list[str] = [
-    "plots/index.php",
-    "plots/view.php",
+    "index.php",
+    "view.php",
 ]
 
 
