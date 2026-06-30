@@ -18,6 +18,7 @@ Interactive visualization of qubits on the Bloch Sphere. Renders quantum states 
 ### `plots/`
 Aesthetic directory listing scripts, somewhat useful if you want to share plots with your collaborators. Take a look at <a href="https://etpwww.etp.kit.edu/~abal/plots" target="_blank" rel="noopener noreferrer">etpwww.etp.kit.edu/~abal/plots</a>.
 
+Use the script `replace_config.py` to modify the hardcoded paths and display name(s). 
 ---
 
 > Hosted on the ETP web server at the Karlsruhe Institute of Technology (KIT).
