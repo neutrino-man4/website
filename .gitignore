@@ -1,0 +1,71 @@
+# Secrets & environment
+.env
+.env.*
+!.env.example
+.htpasswd
+
+# Claude
+.claude
+
+# Logs
+*.log
+logs/
+projects/*/*.pdf
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+share/
+icons/
+images/
+MLG/
+papers/
+plots/*
+research/
+robots.txt
+# Git internals (never commit these)
+.git/
+debug/
+!plots/index.php
+!plots/view.php
+!plots/styles.css
+
+# Compiled / build output
+*.min.js
+*.min.css
+dist/
+build/
+__pycache__/
+*.pyc
+*.pyo
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Backup files
+*.bak
+*.tmp
+*.old
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Sensitive server config
+wp-config.php
+config.php
+database.php
+
+._.DS_Store
+
+# Generated interactive reports
+/interactive/1P1Q/
