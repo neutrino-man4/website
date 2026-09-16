@@ -72,3 +72,6 @@ database.php
 
 # Local deploy script
 deploy.sh
+
+# ETP-only redirect notice
+moved.html
