@@ -45,7 +45,7 @@
       'tl2.role':  'Doctoral Researcher',
       'tl2.place': 'Institute of Experimental Particle Physics (ETP), KIT, Germany',
       'tl2.d1':    'My doctoral work explored the use of classical and quantum machine learning for discovering signatures of new physics at the Large Hadron Collider, with a particular focus on the CMS Detector. I was supervised by <a href="https://etpwww.etp.kit.edu/~klute/" target="_blank" rel="noopener" class="inline-link">Alexander von Humboldt Prof.\u00a0Dr.\u00a0Markus Klute</a> and <strong>Dr.\u00a0Benedikt Maier</strong> (Schmidt AI Fellow, Imperial College London).',
-      'tl2.d2':    'I graduated with distinction, with my dissertation receiving the highest possible grade of <strong>summa cum laude</strong>, and I was subsequently nominated for both the <strong>KIT Doctoral Prize</strong> and the <strong>DPG Otto Haxel Prize</strong>.',
+      'tl2.d2':    'I graduated with distinction, with my dissertation receiving the highest possible grade of <strong>summa cum laude</strong>.',
 
       'tl3.date':  '2017 \u2014 2022',
       'tl3.role':  'BSc (Hons.) and MSc in Physics',
@@ -143,7 +143,7 @@
       'tl2.role':  'Doktorand',
       'tl2.place': 'Institut f\u00fcr Experimentelle Teilchenphysik (ETP), KIT, Deutschland',
       'tl2.d1':    'Meine Dissertation untersuchte den Einsatz von klassischem und Quanten-maschinellem Lernen zur Entdeckung von Signaturen neuer Physik am Large Hadron Collider, mit besonderem Fokus auf den CMS-Detektor. Ich wurde betreut von <a href="https://etpwww.etp.kit.edu/~klute/" target="_blank" rel="noopener" class="inline-link">Alexander-von-Humboldt-Prof.\u00a0Dr.\u00a0Markus Klute</a> und <strong>Dr.\u00a0Benedikt Maier</strong> (Schmidt AI Fellow, Imperial College London).',
-      'tl2.d2':    'Ich schloss die Promotion mit Auszeichnung ab; meine Dissertation erhielt die Bestnote <strong>summa cum laude</strong>. Anschlie\u00dfend wurde ich sowohl f\u00fcr den <strong>KIT-Doktorandenpreis</strong> als auch f\u00fcr den <strong>DPG-Otto-Haxel-Preis</strong> nominiert.',
+      'tl2.d2':    'Ich schloss die Promotion mit Auszeichnung ab; meine Dissertation erhielt die Bestnote <strong>summa cum laude</strong>.',
 
       'tl3.date':  '2017 \u2014 2022',
       'tl3.role':  'B.Sc. (Hons.) und M.Sc. in Physik',
