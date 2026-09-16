@@ -38,8 +38,8 @@
       'tl1.date':  '2025 \u2014 Present',
       'tl1.badge': 'Current',
       'tl1.role':  'Postdoctoral Researcher',
-      'tl1.place': 'Institute of Theoretical Physics (ITP) &amp; Institute of Experimental Particle Physics (ETP), KIT, Germany',
-      'tl1.d1':    'I currently hold a joint postdoctoral position between the <strong>Institute of Experimental Particle Physics (ETP)</strong> and the <strong>Institute of Theoretical Physics (ITP)</strong> at KIT, working in the groups of <strong>Prof.\u00a0Dr.\u00a0Markus Klute</strong> and <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a>. I work on developing novel statistical and machine learning tools, including quantum machine learning, for a deeper understanding of jet substructure.',
+      'tl1.place': 'Institute of Theoretical Physics (ITP) &amp; Institute of Quantum Materials and Technologies (IQMT), KIT, Germany',
+      'tl1.d1':    'I am currently a postdoc affiliated with the <strong>Institute of Theoretical Physics (ITP)</strong> and the <strong>Institute of Quantum Materials and Technologies (IQMT)</strong> at KIT, working with <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a>. I work on the development of novel machine learning techniques, both classical and quantum, with applications to high energy physics and beyond.',
 
       'tl2.date':  '2022 \u2014 2025',
       'tl2.role':  'Doctoral Researcher',
@@ -136,8 +136,8 @@
       'tl1.date':  '2025 \u2014 Heute',
       'tl1.badge': 'Aktuell',
       'tl1.role':  'Wissenschaftlicher Mitarbeiter (Postdoc)',
-      'tl1.place': 'Institut f\u00fcr Theoretische Physik (ITP) &amp; Institut f\u00fcr Experimentelle Teilchenphysik (ETP), KIT, Deutschland',
-      'tl1.d1':    'Derzeit halte ich eine gemeinsame Postdoktoranden-Stelle am <strong>Institut f\u00fcr Experimentelle Teilchenphysik (ETP)</strong> und am <strong>Institut f\u00fcr Theoretische Physik (ITP)</strong> des KIT inne und arbeite in den Gruppen von <strong>Prof.\u00a0Dr.\u00a0Markus Klute</strong> und <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a>. Meine Arbeit umfasst die Entwicklung neuartiger statistischer Methoden und Methoden des maschinellen Lernens, einschlie\u00dflich des Quanten-maschinellen Lernens, f\u00fcr ein tieferes Verst\u00e4ndnis der Jet-Substruktur.',
+      'tl1.place': 'Institut f\u00fcr Theoretische Physik (ITP) &amp; Institut f\u00fcr Quantenmaterialien und -technologien (IQMT), KIT, Deutschland',
+      'tl1.d1':    'Derzeit bin ich Postdoktorand am <strong>Institut f\u00fcr Theoretische Physik (ITP)</strong> und am <strong>Institut f\u00fcr Quantenmaterialien und -technologien (IQMT)</strong> des KIT und arbeite mit <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a> zusammen. Meine Arbeit umfasst die Entwicklung neuartiger Methoden des maschinellen Lernens, sowohl klassisch als auch quantenbasiert, mit Anwendungen in der Hochenergiephysik und dar\u00fcber hinaus.',
 
       'tl2.date':  '2022 \u2014 2025',
       'tl2.role':  'Doktorand',
