@@ -69,3 +69,6 @@ database.php
 
 # Generated interactive reports
 /interactive/1P1Q/
+
+# Local deploy script
+deploy.sh
