@@ -51,7 +51,7 @@
       'tl3.date':  '2017 \u2014 2022',
       'tl3.role':  'BSc (Hons.) and MSc in Physics',
       'tl3.place': 'Indian Institute of Technology Kharagpur (IIT KGP), India',
-      'tl3.d1':    'I studied Physics in Kharagpur, the site of the very first Indian Institute of Technology established in 1952, over five years, graduating with a Master\u2019s degree. During this period I was a summer student at <strong>CERN</strong> (2020) and <strong>DESY</strong> (2021).',
+      'tl3.d1':    'I studied Physics at the Indian Institute of Technology (IIT) Kharagpur. During this period I was a summer student at <strong>CERN</strong> (2020) and <strong>DESY</strong> (2021). My master thesis was carried out in the group of <a href="https://www.iitkgp.ac.in/department/PH/faculty/ph-tsray" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Tirtha Sankar Ray</a>.',
 
       /* ── research.html ────────────────────────────────── */
       'section.research': 'Research',
@@ -158,7 +158,7 @@
       'tl3.date':  '2017 \u2014 2022',
       'tl3.role':  'B.Sc. (Hons.) und M.Sc. in Physik',
       'tl3.place': 'Indian Institute of Technology Kharagpur (IIT\u00a0KGP), Indien',
-      'tl3.d1':    'Ich studierte f\u00fcnf Jahre lang Physik in Kharagpur am ersten, 1952 gegr\u00fcndeten Indian Institute of Technology und schloss mit einem Masterabschluss ab. In dieser Zeit war ich Sommerstudent am <strong>CERN</strong> (2020) und am <strong>DESY</strong> (2021).',
+      'tl3.d1':    'Ich studierte Physik am Indian Institute of Technology (IIT) Kharagpur. In dieser Zeit war ich Sommerstudent am <strong>CERN</strong> (2020) und am <strong>DESY</strong> (2021). Meine Masterarbeit entstand in der Gruppe von <a href="https://www.iitkgp.ac.in/department/PH/faculty/ph-tsray" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Tirtha Sankar Ray</a>.',
 
       /* ── research.html ────────────────────────────────── */
       'section.research': 'Forschung',
