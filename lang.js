@@ -34,7 +34,7 @@
 
       /* ── about.html ───────────────────────────────────── */
       'section.about': 'About Me',
-      'about.intro':   'I work at the boundary where fundamental physics meets modern machine learning, building tools and methods that help us see deeper into the very fabric of matter. Below is a brief timeline of my career so far.',
+      'about.intro':   'I work at the boundary of high energy particle physics and machine learning, both classical and quantum. These techniques help us analyze high-dimensional data recorded at particle colliders, and gain insights into the nature of matter. Whether or not quantum computing, or quantum-informed classical methods can give us any advantage over existing classical techniques, is a question that I try to answer with my work. Below is a brief timeline of my career so far.',
 
       'tl1.date':  '2025 \u2014 Present',
       'tl1.badge': 'Current',
@@ -141,7 +141,7 @@
 
       /* ── about.html ───────────────────────────────────── */
       'section.about': '\u00dcber mich',
-      'about.intro':   'Ich forsche an der Grenze zwischen fundamentaler Physik und modernem maschinellem Lernen und entwickle Methoden, die einen tieferen Einblick in die Grundbausteine der Materie erm\u00f6glichen. Nachfolgend ein kurzer \u00dcberblick \u00fcber meinen bisherigen wissenschaftlichen Werdegang.',
+      'about.intro':   'Ich arbeite an der Schnittstelle von Hochenergie-Teilchenphysik und maschinellem Lernen, sowohl klassisch als auch quantenbasiert. Diese Methoden helfen uns, hochdimensionale Daten zu analysieren, die an Teilchenbeschleunigern aufgezeichnet werden, und Einblicke in die Natur der Materie zu gewinnen. Ob Quantencomputing oder quanteninformierte klassische Methoden einen Vorteil gegen\u00fcber bestehenden klassischen Verfahren bieten k\u00f6nnen, ist eine Frage, die ich mit meiner Arbeit zu beantworten versuche. Nachfolgend ein kurzer \u00dcberblick \u00fcber meinen bisherigen Werdegang.',
 
       'tl1.date':  '2025 \u2014 Heute',
       'tl1.badge': 'Aktuell',
