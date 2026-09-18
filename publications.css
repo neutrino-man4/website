@@ -13,6 +13,16 @@
   flex: 1; /* keeps footer pinned to bottom regardless of content length */
 }
 
+/* ─── Shared label ───────────────────────────────────────── */
+.section-label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 1rem;
+}
+
 /* ─── Page header ────────────────────────────────────────── */
 .pub-header {
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
@@ -243,7 +253,7 @@
 }
 
 .pub-card__abstract.expanded {
-  max-height: 800px;
+  max-height: 3000px;
   opacity: 1;
   margin-bottom: 0.6rem;
 }
