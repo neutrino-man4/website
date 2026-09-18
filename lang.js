@@ -40,7 +40,7 @@
       'tl1.badge': 'Current',
       'tl1.role':  'Postdoctoral Researcher',
       'tl1.place': 'Institute of Theoretical Physics (ITP) &amp; Institute of Quantum Materials and Technologies (IQMT), KIT, Germany',
-      'tl1.d1':    'I am currently a postdoc affiliated with the <strong>Institute of Theoretical Physics (ITP)</strong> and the <strong>Institute of Quantum Materials and Technologies (IQMT)</strong> at KIT, working with <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a>. I work on the development of novel machine learning techniques, both classical and quantum, with applications to high energy physics and beyond.',
+      'tl1.d1':    'I am currently a postdoc affiliated with the <strong>Institute of Theoretical Physics (ITP)</strong> and the <strong>Institute of Quantum Materials and Technologies (IQMT)</strong> at KIT, working with <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a>. My work is best described as high energy physics phenomenology (think hep-ph on arXiv) with a particular focus on machine learning (of both kinds).',
 
       'tl2.date':  '2022 \u2014 2025',
       'tl2.role':  'Doctoral Researcher',
@@ -147,7 +147,7 @@
       'tl1.badge': 'Aktuell',
       'tl1.role':  'Wissenschaftlicher Mitarbeiter (Postdoc)',
       'tl1.place': 'Institut f\u00fcr Theoretische Physik (ITP) &amp; Institut f\u00fcr Quantenmaterialien und -technologien (IQMT), KIT, Deutschland',
-      'tl1.d1':    'Derzeit bin ich Postdoktorand am <strong>Institut f\u00fcr Theoretische Physik (ITP)</strong> und am <strong>Institut f\u00fcr Quantenmaterialien und -technologien (IQMT)</strong> des KIT und arbeite mit <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a> zusammen. Meine Arbeit umfasst die Entwicklung neuartiger Methoden des maschinellen Lernens, sowohl klassisch als auch quantenbasiert, mit Anwendungen in der Hochenergiephysik und dar\u00fcber hinaus.',
+      'tl1.d1':    'Derzeit bin ich Postdoktorand am <strong>Institut f\u00fcr Theoretische Physik (ITP)</strong> und am <strong>Institut f\u00fcr Quantenmaterialien und -technologien (IQMT)</strong> des KIT und arbeite mit <a href="https://itp.kit.edu/~mspannow/" target="_blank" rel="noopener" class="inline-link">Prof.\u00a0Dr.\u00a0Michael Spannowsky</a> zusammen. Meine Arbeit l\u00e4sst sich am besten als Hochenergiephysik-Ph\u00e4nomenologie beschreiben (man denke an hep-ph auf arXiv), mit besonderem Fokus auf maschinelles Lernen (in beiden Auspr\u00e4gungen).',
 
       'tl2.date':  '2022 \u2014 2025',
       'tl2.role':  'Doktorand',
