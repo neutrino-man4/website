@@ -22,6 +22,7 @@
       'nav.about':        'About Me',
       'nav.research':     'Research',
       'nav.publications': 'Publications',
+      'nav.projects':     'Projects',
 
       /* Footer — shared */
       'footer.copy': '\u00a9 2026 Aritra Bal \u00a0\u00b7\u00a0 Karlsruhe Institute of Technology',
@@ -128,6 +129,7 @@
       'nav.about':        '\u00dcber mich',
       'nav.research':     'Forschung',
       'nav.publications': 'Publikationen',
+      'nav.projects':     'Projekte',
 
       /* Footer */
       'footer.copy': '\u00a9 2026 Aritra Bal \u00a0\u00b7\u00a0 Karlsruher Institut f\u00fcr Technologie',
