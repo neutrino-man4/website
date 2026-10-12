@@ -95,6 +95,16 @@
   color: var(--ink-faint);
 }
 
+/* ─── Talk card: invited marker ──────────────────────────── */
+.talk-card__invited {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: -0.35rem;
+}
+
 /* ─── Talks footnote ─────────────────────────────────────── */
 .talks-footnote {
   font-size: 0.84rem;
@@ -572,6 +582,12 @@
 
   .pub-card__num {
     font-size: 1.6rem;
+  }
+
+  .talk-card__invited {
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    margin-bottom: -0.45rem;
   }
 
   .pub-card__links {
