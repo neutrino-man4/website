@@ -584,6 +584,13 @@
     font-size: 1.6rem;
   }
 
+  .pub-status--compact {
+    font-size: 0.55rem;
+    letter-spacing: 0.02em;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   .talk-card__invited {
     font-size: 0.66rem;
     letter-spacing: 0.12em;
