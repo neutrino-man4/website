@@ -39,6 +39,10 @@
     7: {
       title: 'QUIVER: Quantum-Informed Views for Enhanced Representations in Large ML Models',
       code: '@misc{bal2026quiverquantuminformedviewsenhanced,\n  title         = {QUIVER: Quantum-Informed Views for Enhanced Representations in Large ML Models},\n  author        = {Aritra Bal and Michael Binder and Markus Klute and Benedikt Maier and Michael Spannowsky},\n  year          = {2026},\n  eprint        = {2606.02785},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.LG},\n  url           = {https://arxiv.org/abs/2606.02785}\n}'
+    },
+    8: {
+      title: 'Higher Order Component Attribution via Learned Surrogates in High Energy Physics',
+      code: '@misc{laatu2026higherordercomponentattribution,\n      title={Higher Order Component Attribution via Learned Surrogates in High Energy Physics},\n      author={Lauri Laatu and Aritra Bal and Benedikt Maier and Markus Klute and Michael Spannowsky},\n      year={2026},\n      eprint={2611.08656},\n      archivePrefix={arXiv},\n      primaryClass={cs.LG},\n      url={https://arxiv.org/abs/2611.08656},\n}'
     }
 
   };
