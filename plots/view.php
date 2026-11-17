@@ -39,11 +39,11 @@ class DirectoryListing {
 	public $pageTitle = "Plots Directory (Gallery view)";
 
 	// The URL of this script. Optionally set if your server is unable to detect the paths of files
-	public $includeUrl = 'https://etpwww.etp.kit.edu/~abal/plots/view.php';
+	public $includeUrl = 'https://www.itp.kit.edu/~abal/plots/view.php';
 
 	// If you've enabled the includeUrl parameter above, enter the full url to the directory the view.php file
 	// is located in here, followed by a forward slash.
-	public $directoryUrl = 'https://etpwww.etp.kit.edu/~abal/plots/';
+	public $directoryUrl = 'https://www.itp.kit.edu/~abal/plots/';
 
 	// Set to true to list all sub-directories and allow them to be browsed
 	public $showSubDirectories = true;
@@ -1116,7 +1116,7 @@ $listUrl = htmlspecialchars(str_replace('view', 'index', "http://$_SERVER[HTTP_H
 							<li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($name); ?></li>
 							<?php else: ?>
 							<li class="breadcrumb-item">
-								<a href="<?php $directoryUrl = 'https://etpwww.etp.kit.edu/~abal/plots/'; echo $directoryUrl."index.php?dir=$url"; ?>">
+								<a href="<?php $directoryUrl = 'https://www.itp.kit.edu/~abal/plots/'; echo $directoryUrl."index.php?dir=$url"; ?>">
 									<?php echo htmlspecialchars($name); ?>
 								</a>
 							</li>
