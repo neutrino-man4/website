@@ -10,9 +10,9 @@ from pathlib import Path
 
 # Keys are the exact strings to find in the files; values are what to replace them with.
 REPLACEMENTS: dict[str, str] = {
-    "https://etpwww.etp.kit.edu/~abal/plots/index.php": "https://placeholder.example.com/plots/index.php",
-    "https://etpwww.etp.kit.edu/~abal/plots/view.php":  "https://placeholder.example.com/plots/view.php",
-    "https://etpwww.etp.kit.edu/~abal/plots/":          "https://placeholder.example.com/plots/",
+    "https://www.itp.kit.edu/~abal/plots/index.php": "https://placeholder.example.com/plots/index.php",
+    "https://www.itp.kit.edu/~abal/plots/view.php":  "https://placeholder.example.com/plots/view.php",
+    "https://www.itp.kit.edu/~abal/plots/":          "https://placeholder.example.com/plots/",
     "Aritra Bal":                                        "Placeholder Name",
 }
 
